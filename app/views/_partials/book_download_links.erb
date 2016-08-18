@@ -1,0 +1,3 @@
+<% book.formats.each do |format| %>
+<a class="btn btn-info" href="<%= url("/book/#{book.id}/download/#{format.format.downcase}") %>"><%= format.format.upcase %></a>
+<% end %>

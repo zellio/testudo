@@ -1,0 +1,19 @@
+<section class="book-thumbnail">
+  <% if book.has_cover %>
+  <a href="<%= url("/book/#{book.id}") %>">
+    <img class="book-thumbnail-cover" src="<%= url("/book/#{book.id}/cover") %>" alt="<%= book.title %> Cover" />
+  </a>
+  <% end %>
+  <h2 class="book-thumbnail-title">
+    <%= book.title %>
+  </h2>
+  <section class="book-thumbnail-authors">
+    By <%= erb(:"_partials/book_author_list", {}, { authors: book.authors }) %>
+  </section>
+  <% if book.series.size > 0 %>
+  <% series = book.series[0] %>
+  <section class="book-thumbnail-series">
+    <%= erb(:"_partials/book_series_link", {}, { book: book }) %>
+  </section>
+  <% end %>
+</section>

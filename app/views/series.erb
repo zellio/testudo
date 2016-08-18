@@ -1,0 +1,17 @@
+<% series.each do |s| %>
+<article class="series-group">
+  <header>
+    <h3><a href="<%= url("/series/#{s.id}") %>"><%= s.name %></a></h3>
+  </header>
+  <ul>
+    <% s.books.each do |book| %>
+    <li>
+      <%= book.series_index %> -
+      <a href="<%= url("/book/#{book.id}") %>">
+        <%= book.title %>
+      </a>
+    </li>
+    <% end %>
+  </ul>
+</article>
+<% end %>
