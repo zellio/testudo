@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <% if defined? description %>
+    <meta name="description" content="<%= description %>">
+    <% end %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link href="/css/style.css" rel="stylesheet" media="screen">
+    <% if defined? title %>
+    <title>Testudo: <%= title %></title>
+    <% else %>
+    <title>Testudo</title>
+    <% end %>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar">
+        <a class="navbar-brand" href="<%= url('/') %>">Testudo</a>
+        <form class="form-inline pull-xs-right search-form">
+          <input class="form-control" type="text" placeholder="Search">
+          <button class="btn" type="submit">Search</button>
+        </form>
+      </nav>
+      <nav class="col-sm-2">
+        <ul class="nav nav-pills nav-stacked">
+          <li class="nav-item">
+            <a class="nav-link" href="<%= url('/book') %>"><i class="fa fa-book" aria-hidden="true"></i>Books</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= url('/series') %>"><i class="fa fa-inbox" aria-hidden="true"></i>Series</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= url('/author') %>"><i class="fa fa-user" aria-hidden="true"></i>Authors</a>
+          </li>
+        </ul>
+      </nav>
+      <main class="col-sm-10">
+        <%= yield %>
+      </main>
+      <footer>
+        <p></p>
+      </footer>
+    </div>
+  </body>
+</html>

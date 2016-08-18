@@ -1,0 +1,5 @@
+<div class="book-container">
+<% books.each do | book | %>
+<%= erb(:"_partials/book_small", {}, { book: book }) %>
+<% end %>
+</div>

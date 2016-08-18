@@ -1,0 +1,34 @@
+<article class="book">
+  <div class="book-cover-container col-sm-4">
+    <a href="<%= url("/book/#{book.id}") %>">
+      <img class="book-cover" src="<%= url("/book/#{book.id}/cover") %>" alt="<%= book.title %> Cover" />
+    </a>
+  </div>
+  <section class="book-info col-sm-8">
+    <header>
+      <h2><%= book.title %></h2>
+    </header>
+    <% if book.formats.count > 0 %>
+    <p class="book-download-links">
+      <%= erb(:"_partials/book_download_links", {}, { book: book }) %>
+    </p>
+    <% end %>
+    <p class="book-authors">
+      By <%= erb(:"_partials/book_author_list", {}, { authors: book.authors }) %>
+    </p>
+    <% if book.series.count > 0 %>
+    <% series = book.series[0] %>
+    <p class="book-series">
+      <%= erb(:"_partials/book_series_link", {}, { book: book }) %>
+    </p>
+    <% end %>
+    <% if book.comment %>
+    <p class="book-description">
+      <%= book.comment.text %>
+    </p>
+    <% end %>
+    <footer>
+      <section class="book-rating"></section>
+    </footer>
+  </section>
+</article>
