@@ -11,3 +11,7 @@ gem 'sequel', '~> 4.37'
 gem 'sinatra', '~> 1.4'
 gem 'sinatra-contrib', '~> 1.4'
 gem 'sinatra-param', '~> 1.4'
+
+group :production do
+  gem 'puma', '~> 3.6'
+end
