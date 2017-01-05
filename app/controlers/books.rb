@@ -1,8 +1,8 @@
-module Testudo::Controller::Book
+module Testudo::Controller::Books
   def self.registered(app)
-    app.namespace '/book' do
+    app.namespace '/books' do
       get '/?' do
-        erb :book, locals: {
+        erb :books, locals: {
           title: 'Library',
           description: 'List of all books in the library',
           books: Testudo::Model::Book.reverse(:id)
@@ -15,7 +15,7 @@ module Testudo::Controller::Book
         book = Testudo::Model::Book[id]
         desc = "#{book.title} by #{book.authors.map(&:name).join(', ')}"
 
-        erb :"book/id", locals: {
+        erb :"books/id", locals: {
           title: desc,
           description: desc,
           book: book

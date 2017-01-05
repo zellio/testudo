@@ -7,7 +7,7 @@
     <% s.books.each do |book| %>
     <li>
       <%= book.series_index %> -
-      <a href="<%= url("/book/#{book.id}") %>">
+      <a href="<%= url("/books/#{book.id}") %>">
         <%= book.title %>
       </a>
     </li>

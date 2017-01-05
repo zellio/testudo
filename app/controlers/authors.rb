@@ -1,8 +1,8 @@
-module Testudo::Controller::Author
+module Testudo::Controller::Authors
   def self.registered(app)
-    app.namespace '/author' do
+    app.namespace '/authors' do
       get '/?' do
-        erb :author, locals: {
+        erb :authors, locals: {
           title: 'Author List',
           description: 'List of all authors in the library',
           authors: Testudo::Model::Author.order(:sort)
@@ -15,7 +15,7 @@ module Testudo::Controller::Author
         author = Testudo::Model::Author[id]
         desc = "Books by #{author.name}"
 
-        erb :"author/id", locals: {
+        erb :"authors/id", locals: {
           title: desc,
           description: desc,
           author: author

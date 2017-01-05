@@ -1,12 +1,12 @@
 <% authors.each do |a| %>
 <article class="author-group">
   <header>
-    <h3><a href="<%= url("/author/#{a.id}") %>"><%= a.name %></a></h3>
+    <h3><a href="<%= url("/authors/#{a.id}") %>"><%= a.name %></a></h3>
   </header>
   <ul>
     <% a.books.each do |book| %>
     <li>
-      <a href="<%= url("/book/#{book.id}") %>">
+      <a href="<%= url("/books/#{book.id}") %>">
         <%= book.title %>
       </a>
     </li>

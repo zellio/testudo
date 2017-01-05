@@ -1,7 +1,7 @@
 <section class="book-thumbnail">
   <% if book.has_cover %>
-  <a href="<%= url("/book/#{book.id}") %>">
-    <img class="book-thumbnail-cover" src="<%= url("/book/#{book.id}/cover") %>" alt="<%= book.title %> Cover" />
+  <a href="<%= url("/books/#{book.id}") %>">
+    <img class="book-thumbnail-cover" src="<%= url("/books/#{book.id}/cover") %>" alt="<%= book.title %> Cover" />
   </a>
   <% end %>
   <h2 class="book-thumbnail-title">
