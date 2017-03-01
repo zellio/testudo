@@ -29,6 +29,10 @@ module Testudo::Controller::Books
 
         filepath = File.join(settings.library, book.path, 'cover.jpg')
 
+        etag Digest::SHA1.file(filepath)
+
+        cache_control :public, :must_revalidate, :max_age => 2592000
+
         send_file(filepath, type: 'image/jpeg', filename: 'cover.jpg')
       end
 
@@ -46,6 +50,10 @@ module Testudo::Controller::Books
         filename = "#{format.name}.#{format_str}"
 
         filepath = File.join(settings.library, book.path, filename)
+
+        etag Digest::SHA1.file(filepath)
+
+        cache_control :public, :must_revalidate, :max_age => 2592000
 
         send_file(filepath, type: type, filename: filename)
       end
