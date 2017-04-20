@@ -1,3 +1,5 @@
-<% book.formats.each do |format| %>
+<% book.formats.select do |format|
+  format.format.upcase != 'ORIGINAL_EPUB'
+end.each do |format| %>
 <a class="btn btn-info" href="<%= url("/books/#{book.id}/download/#{format.format.downcase}") %>"><%= format.format.upcase %></a>
 <% end %>
