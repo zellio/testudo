@@ -1,12 +1,9 @@
 ---
 development: &development
-  adapter: sqlite
-  database: db/development.db
+  library: db
 
 test:
   <<: *development
-  database: db/test.db
 
 production:
   <<: *development
-  database: db/metadata.db
