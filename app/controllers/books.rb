@@ -1,62 +1,58 @@
-module Testudo::Controller::Books
-  def self.registered(app)
-    app.namespace '/books' do
-      get '/?' do
-        erb :books, locals: {
+app.namespace '/books' do
+  get '/?' do
+    erb :books, locals: {
           title: 'Library',
           description: 'List of all books in the library',
           books: Testudo::Model::Book.reverse(:id)
         }
-      end
+  end
 
-      get '/:id' do |id|
-        param :id, Integer, required: true
+  get '/:id' do |id|
+    param :id, Integer, required: true
 
-        book = Testudo::Model::Book[id]
-        desc = "#{book.title} by #{book.authors.map(&:name).join(', ')}"
+    book = Testudo::Model::Book[id]
+    desc = "#{book.title} by #{book.authors.map(&:name).join(', ')}"
 
-        erb :"books/id", locals: {
-          title: desc,
-          description: desc,
-          book: book
-        }
-      end
+    erb :"books/id", locals: {
+      title: desc,
+      description: desc,
+      book: book
+    }
+  end
 
-      get '/:id/cover' do |id|
-        param :id, Integer, required: true
+  get '/:id/cover' do |id|
+    param :id, Integer, required: true
 
-        book = Testudo::Model::Book[id]
+    book = Testudo::Model::Book[id]
 
-        filepath = File.join(settings.library, book.path, 'cover.jpg')
+    filepath = File.join(settings.library, book.path, 'cover.jpg')
 
-        etag Digest::SHA1.file(filepath)
+    etag Digest::SHA1.file(filepath)
 
-        cache_control :public, :must_revalidate, :max_age => 2592000
+    cache_control :public, :must_revalidate, :max_age => 2592000
 
-        send_file(filepath, type: 'image/jpeg', filename: 'cover.jpg')
-      end
+    send_file(filepath, type: 'image/jpeg', filename: 'cover.jpg')
+  end
 
-      get '/:id/download/:format' do |id, format|
-        param :id, Integer, required: true
+  get '/:id/download/:format' do |id, format|
+    param :id, Integer, required: true
 
-        book = Testudo::Model::Book[id]
-        format = Testudo::Model::Datum[book: id, format: format.upcase]
+    book = Testudo::Model::Book[id]
+    format = Testudo::Model::Datum[book: id, format: format.upcase]
 
-        format_str = format.format.downcase
+    format_str = format.format.downcase
 
-        type = { 'epub' => 'application/epub+zip',
-                 'mobi' => 'application/x-mobipocket-ebook' }[format_str]
+    type = { 'epub' => 'application/epub+zip',
+             'mobi' => 'application/x-mobipocket-ebook' }[format_str]
 
-        filename = "#{format.name}.#{format_str}"
+    filename = "#{format.name}.#{format_str}"
 
-        filepath = File.join(settings.library, book.path, filename)
+    filepath = File.join(settings.library, book.path, filename)
 
-        etag Digest::SHA1.file(filepath)
+    etag Digest::SHA1.file(filepath)
 
-        cache_control :public, :must_revalidate, :max_age => 2592000
+    cache_control :public, :must_revalidate, :max_age => 2592000
 
-        send_file(filepath, type: type, filename: filename)
-      end
-    end
+    send_file(filepath, type: type, filename: filename)
   end
 end

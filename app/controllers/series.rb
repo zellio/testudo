@@ -1,28 +1,24 @@
-module Testudo::Controller::Series
-  def self.registered(app)
-    app.namespace '/series' do
-      get '/?' do
-        series = Testudo::Model::Series.order(:sort)
+app.namespace '/series' do
+  get '/?' do
+    series = Testudo::Model::Series.order(:sort)
 
-        erb :series, locals: {
+    erb :series, locals: {
           title: 'Series list',
           description: 'List of all series in the library',
           series: series
         }
-      end
+  end
 
-      get '/:id' do |id|
-        param :id, Integer, required: true
+  get '/:id' do |id|
+    param :id, Integer, required: true
 
-        series = Testudo::Model::Series[id]
-        desc = "Books in #{series.name}"
+    series = Testudo::Model::Series[id]
+    desc = "Books in #{series.name}"
 
-        erb :"series/id", locals: {
-          title: desc,
-          description: desc,
-          series: series
-        }
-      end
-    end
+    erb :"series/id", locals: {
+      title: desc,
+      description: desc,
+      series: series
+    }
   end
 end

@@ -4,6 +4,7 @@ module Sinatra
   module Drumkit
     def self.registered(app)
       @@app_dir = app.app_dir || File.join(app.root, 'app')
+
       parent_class = Kernel.const_get(app.to_s.split('::').first)
 
       model_module = Module.new
@@ -22,12 +23,7 @@ module Sinatra
       parent_class.const_set(:Controller, controller_module)
 
       Dir[::File.join(@@app_dir, 'controllers', '*.rb')].each do |file|
-        require file
-      end
-
-      controller_module.constants.each do |const|
-        nodule = controller_module.const_get const
-        app.register(nodule) if nodule.class == Module
+        app.instance_eval(File.read(file), file)
       end
     end
   end
