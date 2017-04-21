@@ -1,8 +1,9 @@
 require 'sinatra/base'
 require 'sinatra/config_file'
+require 'sinatra/drumkit'
 require 'sinatra/namespace'
-require 'sinatra/sequel_connector'
 require 'sinatra/param'
+require 'sinatra/sequel_connector'
 
 module Testudo
   class Application < Sinatra::Base
@@ -18,13 +19,9 @@ module Testudo
     register Sinatra::SequelConnector
     set :db, "#{settings.adapter}://#{settings.database}"
 
-    Dir[::File.join(app_dir, '**', '*.rb')].each do |file|
-      require file
-    end
-
     helpers Sinatra::Param
 
     register Sinatra::Namespace
-    register Testudo::Controllers
+    register Sinatra::Drumkit
   end
 end
