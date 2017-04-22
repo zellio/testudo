@@ -1,0 +1,12 @@
+---
+development: &development
+  mimetypes:
+    epub: application/epub+zip
+    mobi: application/x-mobipocket-ebook
+    azw3: application/x-mobi8-ebook
+
+test:
+  <<: *development
+
+production:
+  <<: *development

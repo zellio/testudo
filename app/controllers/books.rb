@@ -42,8 +42,7 @@ app.namespace '/books' do
 
     format_str = format.format.downcase
 
-    type = { 'epub' => 'application/epub+zip',
-             'mobi' => 'application/x-mobipocket-ebook' }[format_str]
+    type = settings.mimetypes[format_str]
 
     filename = "#{format.name}.#{format_str}"
 
