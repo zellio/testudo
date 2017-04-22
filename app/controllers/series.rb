@@ -1,4 +1,4 @@
-app.namespace '/series' do
+namespace '/series' do
   get '/?' do
     series = Testudo::Model::Series.order(:sort)
 

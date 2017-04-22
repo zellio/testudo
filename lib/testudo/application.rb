@@ -23,5 +23,7 @@ module Testudo
 
     register Sinatra::Namespace
     register Sinatra::Drumkit
+
+    rhythm namespace: Testudo
   end
 end

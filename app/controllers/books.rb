@@ -1,4 +1,4 @@
-app.namespace '/books' do
+namespace '/books' do
   get '/?' do
     erb :books, locals: {
           title: 'Library',
