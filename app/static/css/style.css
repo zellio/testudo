@@ -89,3 +89,18 @@ a:hover {
         margin-bottom: 20px;
     }
 }
+
+.page-link {
+    color: #45b29d;
+}
+
+.page-link:hover {
+    color: #444;
+}
+
+.page-item.active .page-link,
+.page-item.active .page-link:focus,
+.page-item.active .page-link:hover {
+    background-color: #2b9a83;
+    border-color: #3e8274;
+}

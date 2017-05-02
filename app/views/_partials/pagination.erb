@@ -1,0 +1,36 @@
+<%
+pages = (0..count).step(limit).to_a
+
+current_page = offset / limit
+
+prev_page = current_page - 1
+next_page = current_page + 1
+%>
+
+<ul class="pagination">
+  <% if pages[prev_page] < offset %>
+  <li class="page-item">
+    <a class="page-link" href="/books?limit=<%= limit %>&offset=<%= pages[prev_page] %>">Previous</a>
+  <% else %>
+  <li class="page-item disabled">
+  <span class="page-link">Previous</span>
+  <% end %>
+  </li>
+  <% pages.each_with_index do |page_offset, index| %>
+    <% if offset == page_offset %>
+    <li class="page-item active">
+    <% else %>
+    <li class="page-item">
+    <% end %>
+    <a class="page-link" href="/books?limit=<%= limit %>&offset=<%= page_offset %>"><%= index + 1 %></a>
+    </li>
+  <% end %>
+  <% if next_page < pages.count %>
+  <li class="page-item">
+    <a class="page-link" href="/books?limit=<%= limit %>&offset=<%= pages[next_page] %>">Next</a>
+  <% else %>
+    <li class="page-item disabled">
+    <span class="page-link">Next</span>
+  <% end %>
+  </li>
+</ul>
