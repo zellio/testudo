@@ -1,4 +1,9 @@
+<%
+count = series.books_dataset.count
+books = series.books_dataset.limit(limit, offset)
+%>
+
 <h2 class="section-title">
   Books in <%= series.name %>
 </h2>
-<%= erb(:books, {}, { books: series.books }) %>
+<%= erb(:books, {}, { books: books, num_books: count, offset: offset, limit: limit }) %>
