@@ -70,6 +70,21 @@ a:hover {
     margin-bottom: 20px;
 }
 
+.page-link {
+    color: #45b29d;
+}
+
+.page-link:hover {
+    color: #444;
+}
+
+.page-item.active .page-link,
+.page-item.active .page-link:focus,
+.page-item.active .page-link:hover {
+    background-color: #2b9a83;
+    border-color: #3e8274;
+}
+
 @media (max-width: 544px) {
     .navbar-brand {
         display: block;
@@ -87,5 +102,18 @@ a:hover {
     }
     .book-cover {
         margin-bottom: 20px;
+    }
+
+    .page-item {
+        display: none;
+    }
+
+    .page-nav, .active {
+        display: inline;
+    }
+
+    .page-nav a,
+    .page-nav span {
+        width: 90px;
     }
 }

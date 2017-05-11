@@ -1,9 +1,18 @@
 namespace '/books' do
   get '/?' do
+    param :offset, Integer, required: false
+    param :limit, Integer, required: false
+
+    offset = params["offset"] || 0
+    limit = params["limit"] || 24
+
     erb :books, locals: {
           title: 'Library',
           description: 'List of all books in the library',
-          books: Testudo::Model::Book.reverse(:id)
+          books: Testudo::Model::Book.reverse(:id).limit(limit, offset),
+          num_books: Testudo::Model::Book.count,
+          offset: offset,
+          limit: limit,
         }
   end
 
