@@ -104,16 +104,16 @@ a:hover {
         margin-bottom: 20px;
     }
 
-	.page-item {
-		display: none;
-	}
+    .page-item {
+        display: none;
+    }
 
-	.page-nav, .active {
-		display: inline;
-	}
+    .page-nav, .active {
+        display: inline;
+    }
 
-	.page-nav a {
-		width: 90px;
-	}
-
+    .page-nav a,
+    .page-nav span {
+        width: 90px;
+    }
 }

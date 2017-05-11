@@ -12,15 +12,15 @@ next_page = current_page + 1
   <li class="page-item page-nav">
     <a class="page-link" href="/books?limit=<%= limit %>&offset=<%= pages[prev_page] %>">Previous</a>
   <% else %>
-  <li class="page-item disabled">
+  <li class="page-item page-nav disabled">
   <span class="page-link">Previous</span>
   <% end %>
   </li>
   <% pages.each_with_index do |page_offset, index| %>
     <% if offset == page_offset %>
-    <li class="page-item active">
+    <li class="page-item page-num active">
     <% else %>
-    <li class="page-item num-page">
+    <li class="page-item page-num">
     <% end %>
     <a class="page-link" href="/books?limit=<%= limit %>&offset=<%= page_offset %>"><%= index + 1 %></a>
     </li>
@@ -29,7 +29,7 @@ next_page = current_page + 1
   <li class="page-item page-nav">
     <a class="page-link" href="/books?limit=<%= limit %>&offset=<%= pages[next_page] %>">Next</a>
   <% else %>
-    <li class="page-item disabled">
+  <li class="page-item page-nav disabled">
     <span class="page-link">Next</span>
   <% end %>
   </li>
