@@ -4,7 +4,7 @@ namespace '/books' do
     param :limit, Integer, required: false
 
     offset = params["offset"] || 0
-    limit = params["limit"] || 24
+    limit = params["limit"] || 16
 
     erb :books, locals: {
           title: 'Library',

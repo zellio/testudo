@@ -14,7 +14,7 @@ namespace '/authors' do
     param :limit, Integer, required: false
 
     offset = params["offset"] || 0
-    limit = params["limit"] || 24
+    limit = params["limit"] || 16
 
     author = Testudo::Model::Author[id]
     desc = "Books by #{author.name}"

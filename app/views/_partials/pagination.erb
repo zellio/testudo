@@ -7,12 +7,12 @@ prev_page = current_page - 1
 next_page = current_page + 1
 %>
 
-<ul class="pagination">
+<ul class="pagination justify-content-center">
   <% if pages[prev_page] < offset %>
-  <li class="page-item page-nav">
+  <li class="page-item">
     <a class="page-link" href="<%= request.path_info %>?limit=<%= limit %>&offset=<%= pages[prev_page] %>">Previous</a>
   <% else %>
-  <li class="page-item page-nav disabled">
+  <li class="page-item disabled">
   <span class="page-link">Previous</span>
   <% end %>
   </li>
@@ -20,16 +20,16 @@ next_page = current_page + 1
     <% if offset == page_offset %>
     <li class="page-item page-num active">
     <% else %>
-    <li class="page-item page-num">
+    <li class="page-item page-num hidden-sm-down">
     <% end %>
     <a class="page-link" href="<%= request.path_info %>?limit=<%= limit %>&offset=<%= page_offset %>"><%= index + 1 %></a>
     </li>
   <% end %>
   <% if next_page < pages.count %>
-  <li class="page-item page-nav">
+  <li class="page-item">
     <a class="page-link" href="<%= request.path_info %>?limit=<%= limit %>&offset=<%= pages[next_page] %>">Next</a>
   <% else %>
-  <li class="page-item page-nav disabled">
+  <li class="page-item disabled">
     <span class="page-link">Next</span>
   <% end %>
   </li>

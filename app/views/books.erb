@@ -1,13 +1,12 @@
-<div class="book-container">
-<% books.each do | book | %>
-<%= erb(:"_partials/book_small", {}, { book: book }) %>
-<% end %>
+<div class=row>
+  <% books.each do |book| %>
+  <%= erb(:"_partials/book_card", {}, { book: book }) %>
+  <% end %>
+</div>
 <footer class="book-footer">
   <%= erb(:"_partials/pagination", {}, {
       data: books,
       count: num_books,
       offset: offset,
-      limit: limit,
-  }) %>
+      limit: limit, }) %>
 </footer>
-</div>

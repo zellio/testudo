@@ -1,10 +1,10 @@
-<article class="book">
-  <div class="book-cover-container col-sm-4">
+<article class="row">
+  <section class="book-cover-container col-md-4 text-center">
     <a href="<%= url("/books/#{book.id}") %>">
       <img class="book-cover" src="<%= url("/books/#{book.id}/cover") %>" alt="<%= book.title %> Cover" />
     </a>
-  </div>
-  <section class="book-info col-sm-8">
+  </section>
+  <section class="book-info col-md-8">
     <header>
       <h2><%= book.title %></h2>
     </header>

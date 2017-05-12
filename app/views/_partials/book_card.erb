@@ -1,0 +1,16 @@
+<section class="book-card col-lg-3 col-md-4 col-sm-6">
+  <a href="<%= url("/books/#{book.id}") %>">
+    <img class="book-card-cover" style=""
+         src="<%= url("/books/#{book.id}/cover") %>" alt="<%= book.title %> Cover" />
+  </a>
+  <h5 class="book-card-title"><%= book.title %></h5>
+  <p>
+    By <%= erb(:"_partials/book_author_list", {}, { authors: book.authors }) %>
+  </p>
+  <% if book.series.size > 0 %>
+  <p>
+    <% series = book.series[0] %>
+    <%= erb(:"_partials/book_series_link", {}, { book: book }) %>
+  </p>
+  <% end %>
+</section>

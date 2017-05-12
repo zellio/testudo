@@ -7,8 +7,8 @@
     <% if defined? description %>
     <meta name="description" content="<%= description %>">
     <% end %>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css" integrity="sha384-MIwDKRSSImVFAZCVLtU0LMDdON6KVCrZHyVQQj6e8wIEJkW4tvwqXrbMIya1vriY" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="/css/style.css" rel="stylesheet" media="screen">
     <% if defined? title %>
     <title>Testudo: <%= title %></title>
@@ -18,31 +18,42 @@
   </head>
   <body>
     <div class="container">
-      <nav class="navbar">
-        <a class="navbar-brand" href="<%= url('/') %>">Testudo</a>
-        <form class="form-inline pull-xs-right search-form">
-          <input class="form-control" type="text" placeholder="Search">
-          <button class="btn" type="submit">Search</button>
-        </form>
-      </nav>
-      <nav class="col-sm-2">
-        <ul class="nav nav-pills nav-stacked">
+      <header>
+        <h1 class="main-header text-center text-md-left">
+          <a href="<%= url('/') %>">Testudo</a>
+        </h1>
+      </header>
+      <nav>
+        <ul class="nav nav-pills justify-content-center justify-content-md-start">
           <li class="nav-item">
-            <a class="nav-link" href="<%= url('/books') %>"><i class="fa fa-book" aria-hidden="true"></i>Books</a>
+            <a class="nav-link" href="<%= url('/books') %>">
+              <i class="fa fa-book" aria-hidden="true"></i>Books
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%= url('/series') %>"><i class="fa fa-inbox" aria-hidden="true"></i>Series</a>
+            <a class="nav-link" href="<%= url('/series') %>">
+              <i class="fa fa-inbox" aria-hidden="true"></i>Series
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<%= url('/authors') %>"><i class="fa fa-user" aria-hidden="true"></i>Authors</a>
+            <a class="nav-link" href="<%= url('/authors') %>">
+              <i class="fa fa-user" aria-hidden="true"></i>Authors
+            </a>
           </li>
         </ul>
       </nav>
-      <main class="col-sm-10">
+      <main>
         <%= yield %>
       </main>
       <footer>
-        <p></p>
+        <ul class="nav justify-content-center">
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/zellio/testudo">GitHub Project</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/zellio/testudo/issues">Issues</a>
+          </li>
+        </ul>
       </footer>
     </div>
   </body>
