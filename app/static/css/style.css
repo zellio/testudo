@@ -82,7 +82,14 @@ a:hover {
 
 .page-item.active .page-link,
 .page-item.active .page-link:focus,
-.page-item.active .page-link:hover {
+.page-item.active .page-link:hover,
+.btn-primary {
     background-color: #2b9a83;
+    border-color: #2b9a83;
+}
+
+.btn-primary:hover {
+    background-color: #3e8274;
     border-color: #3e8274;
+    cursor: pointer;
 }

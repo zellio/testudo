@@ -23,6 +23,14 @@ bundle install
 bundle exec rackup
 ```
 
+### Search
+
+If you'd like search to work you'll need to run
+the [search.sql](db/search.sql) script against your database to generate the
+search indices. This shouldn't affect the ability of the database to function
+for calibre but you will need to re-run the script every time you add new
+content.
+
 ## Usage
 
 TODO: Write usage instructions here

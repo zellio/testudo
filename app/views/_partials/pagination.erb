@@ -5,12 +5,14 @@ current_page = offset / limit
 
 prev_page = current_page - 1
 next_page = current_page + 1
+
+params = Rack::Utils.parse_query(request.query_string)
 %>
 
 <ul class="pagination justify-content-center">
   <% if pages[prev_page] < offset %>
   <li class="page-item">
-    <a class="page-link" href="<%= request.path_info %>?limit=<%= limit %>&offset=<%= pages[prev_page] %>">Previous</a>
+    <a class="page-link" href="<%= request.path %>?<%= Rack::Utils.build_query(params.merge({"limit" => limit, "offset" => pages[prev_page]})) %>">Previous</a>
   <% else %>
   <li class="page-item disabled">
   <span class="page-link">Previous</span>
@@ -22,12 +24,12 @@ next_page = current_page + 1
     <% else %>
     <li class="page-item page-num hidden-sm-down">
     <% end %>
-    <a class="page-link" href="<%= request.path_info %>?limit=<%= limit %>&offset=<%= page_offset %>"><%= index + 1 %></a>
+    <a class="page-link" href="<%= request.path %>?<%= Rack::Utils.build_query(params.merge({"limit" => limit, "offset" => page_offset})) %>"><%= index + 1 %></a>
     </li>
   <% end %>
   <% if next_page < pages.count %>
   <li class="page-item">
-    <a class="page-link" href="<%= request.path_info %>?limit=<%= limit %>&offset=<%= pages[next_page] %>">Next</a>
+    <a class="page-link" href="<%= request.path %>?<%= Rack::Utils.build_query(params.merge({"limit" => limit, "offset" => pages[next_page]})) %>">Next</a>
   <% else %>
   <li class="page-item disabled">
     <span class="page-link">Next</span>

@@ -4,9 +4,11 @@
   <% end %>
 </div>
 <footer class="book-footer">
+  <% if num_books > 0 %>
   <%= erb(:"_partials/pagination", {}, {
       data: books,
       count: num_books,
       offset: offset,
       limit: limit, }) %>
+  <% end %>
 </footer>
