@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS fts_short_index;
 CREATE VIRTUAL TABLE
     fts_short_index
 USING
@@ -13,6 +14,7 @@ SELECT
 FROM
     books;
 
+DROP TABLE IF EXISTS fts_index;
 CREATE VIRTUAL TABLE
     fts_index
 USING
