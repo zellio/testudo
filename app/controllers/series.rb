@@ -16,7 +16,7 @@ namespace '/series' do
     param :limit, Integer, required: false
 
     offset = params["offset"] || 0
-    limit = params["limit"] || 16
+    limit = params["limit"] || 24
 
     series = Testudo::Model::Series[id]
     desc = "Books in #{series.name}"

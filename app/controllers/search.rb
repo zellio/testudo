@@ -8,7 +8,7 @@ namespace '/search' do
     query = params["query"]
 
     offset = params["offset"] || 0
-    limit = params["limit"] || 16
+    limit = params["limit"] || 24
 
     if query.nil? or query.empty?
       erb :search
