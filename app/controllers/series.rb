@@ -12,21 +12,20 @@ namespace '/series' do
   get '/:id' do |id|
     param :id, Integer, required: true
 
-    param :offset, Integer, required: false
-    param :limit, Integer, required: false
-
-    offset = params["offset"] || 0
-    limit = params["limit"] || 24
+    param :page, Integer, required: false
+    param :items, Integer, required: false
 
     series = Testudo::Model::Series[id]
     desc = "Books in #{series.name}"
+
+    pagy, books = pagy(series.books_dataset)
 
     erb :"series/id", locals: {
       title: desc,
       description: desc,
       series: series,
-      limit: limit,
-      offset: offset
+      pagy: pagy,
+      books: books
     }
   end
 end
