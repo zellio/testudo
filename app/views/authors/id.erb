@@ -1,9 +1,4 @@
-<%
-count = author.books_dataset.count
-books = author.books_dataset.limit(limit, offset)
-%>
-
 <h2 class="section-title text-center text-md-left">
   <%= author.name %>
 </h2>
-<%= erb(:books, {}, { books: books, num_books: count, offset: offset, limit: limit }) %>
+<%= erb :books, locals: { pagy: pagy, books: books } %>
