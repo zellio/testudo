@@ -5,7 +5,7 @@ module Sinatra
   module SequelConnector
     module Helpers
       def db
-        options.db
+        settings.db
       end
     end
 
