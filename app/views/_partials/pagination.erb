@@ -22,7 +22,7 @@ params = Rack::Utils.parse_query(request.query_string)
     <% if offset == page_offset %>
     <li class="page-item page-num active">
     <% else %>
-    <li class="page-item page-num hidden-sm-down">
+    <li class="page-item page-num d-none d-md-block">
     <% end %>
     <a class="page-link" href="<%= request.path %>?<%= Rack::Utils.build_query(params.merge({"limit" => limit, "offset" => page_offset})) %>"><%= index + 1 %></a>
     </li>
