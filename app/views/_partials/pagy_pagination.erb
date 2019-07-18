@@ -40,7 +40,7 @@
 <% if pagy.prev                 %>    <li class="page-item prev"><%= link.call(pagy.prev, pagy_t('pagy.nav.prev'), 'aria-label="previous"') %></li>
 <% else                         %>    <li class="page-item prev disabled"><a href="#" class="page-link"><%= pagy_t('pagy.nav.prev') %></a></li>
 <% end                          %>
-<% pagy.series.each do |item|
+<% pagy.series.each do |item|   %>
 <%   if    item.is_a?(Integer)  %>    <li class="page-item d-none d-md-block"><%= link.call(item) %></li>
 <%   elsif item.is_a?(String)   %>    <li class="page-item active"><%= link.call(item) %></li>
 <%   elsif item == :gap         %>    <li class="page-item d-none d-md-block disabled gap"><a href="#" class="page-link"><%= pagy_t('pagy.nav.gap') %></a></li>
