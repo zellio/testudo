@@ -5,6 +5,8 @@ require 'sinatra/namespace'
 require 'sinatra/param'
 require 'sinatra/sequel_connector'
 
+require 'pagy'
+
 module Testudo
   class Application < Sinatra::Base
     set :root, -> { File.expand_path(File.join(__dir__, '..', '..')) }
@@ -25,5 +27,16 @@ module Testudo
     register Sinatra::Drumkit
 
     rhythm namespace: Testudo
+
+    include Pagy::Backend
+    helpers Pagy::Frontend
+
+    private
+
+    def pagy_get_vars(collection, vars)
+      { count: collection.count,
+        page: params["page"],
+        items: params["items"] || 24, }
+    end
   end
 end

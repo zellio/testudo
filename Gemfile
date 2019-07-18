@@ -6,6 +6,7 @@ group :development, :test do
   gem 'rspec', '~> 3.8'
 end
 
+gem 'pagy', '~> 3.4'
 gem 'sqlite3', '~> 1.4'
 gem 'sequel', '~> 5.22'
 gem 'sinatra', '~> 1.4'
