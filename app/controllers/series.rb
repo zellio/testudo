@@ -16,6 +16,9 @@ namespace '/series' do
     param :items, Integer, required: false
 
     series = Testudo::Model::Series[id]
+
+    halt 404 unless series
+
     desc = "Books in #{series.name}"
 
     pagy, books = pagy(series.books_dataset)

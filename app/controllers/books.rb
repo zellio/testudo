@@ -17,6 +17,9 @@ namespace '/books' do
     param :id, Integer, required: true
 
     book = Testudo::Model::Book[id]
+
+    halt 404 unless book
+
     desc = "#{book.title} by #{book.authors.map(&:name).join(', ')}"
 
     erb :"books/id", locals: {
@@ -31,7 +34,11 @@ namespace '/books' do
 
     book = Testudo::Model::Book[id]
 
+    halt 404 unless book
+
     filepath = File.join(settings.library, book.path, 'cover.jpg')
+
+    halt 404 unless File.readable?(filepath)
 
     etag Digest::SHA1.file(filepath)
 
@@ -44,7 +51,12 @@ namespace '/books' do
     param :id, Integer, required: true
 
     book = Testudo::Model::Book[id]
+
+    halt 404 unless book
+
     format = Testudo::Model::Datum[book: id, format: format.upcase]
+
+    halt 404 unless format
 
     format_str = format.format.downcase
 

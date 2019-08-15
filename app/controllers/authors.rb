@@ -14,6 +14,9 @@ namespace '/authors' do
     param :items, Integer, required: false
 
     author = Testudo::Model::Author[id]
+
+    halt 404 unless author
+
     desc = "Books by #{author.name}"
 
     pagy, books = pagy(author.books_dataset)
