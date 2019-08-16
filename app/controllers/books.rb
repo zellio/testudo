@@ -82,7 +82,11 @@ namespace '/books' do
     format = Testudo::Model::Datum[book: id, format: 'EPUB']
     halt 404 unless format
 
+    desc = "Read #{book.title} by #{book.authors.map(&:name).join(', ')}"
+
     erb :"books/id/read", locals: {
+      title: desc,
+      description: desc
     }
   end
 
