@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 namespace '/search' do
   get '/?' do
     param :query, String, required: false
     param :page, Integer, required: false
     param :items, Integer, required: false
 
-    query = params["query"]
+    query = params['query']
 
-    if query.nil? or query.empty?
+    if query.nil? || query.empty?
       erb :search, locals: {
         title: 'Search',
-        description: 'Search',
+        description: 'Search'
       }
     else
       book_ids = db[:fts_short_index]
@@ -22,7 +24,7 @@ namespace '/search' do
         title: 'Search Results',
         description: 'Search Results',
         pagy: pagy,
-        books: books,
+        books: books
       }
     end
   end

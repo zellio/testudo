@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace '/series' do
   get '/?' do
     series = Testudo::Model::Series.order(:sort)

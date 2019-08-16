@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace '/books' do
   get '/?' do
     param :page, Integer, required: false
@@ -9,7 +11,7 @@ namespace '/books' do
       title: 'Library',
       description: 'List of all books in the library',
       pagy: pagy,
-      books: books,
+      books: books
     }
   end
 
@@ -38,7 +40,7 @@ namespace '/books' do
     halt 404 unless File.readable?(filepath)
 
     etag Digest::SHA1.file(filepath)
-    cache_control :public, :must_revalidate, :max_age => 2592000
+    cache_control :public, :must_revalidate, max_age: 2592000
 
     send_file(filepath, type: 'image/jpeg', filename: 'cover.jpg')
   end
@@ -58,7 +60,7 @@ namespace '/books' do
     filepath = File.join(settings.library, book.path, filename)
 
     etag Digest::SHA1.file(filepath)
-    cache_control :public, :must_revalidate, :max_age => 2592000
+    cache_control :public, :must_revalidate, max_age: 2592000
 
     send_file(filepath, type: type, filename: filename)
   end

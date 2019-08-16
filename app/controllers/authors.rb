@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace '/authors' do
   get '/?' do
     erb :authors, locals: {
