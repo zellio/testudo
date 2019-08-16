@@ -1,10 +1,10 @@
 namespace '/authors' do
   get '/?' do
     erb :authors, locals: {
-          title: 'Author List',
-          description: 'List of all authors in the library',
-          authors: Testudo::Model::Author.order(:sort)
-        }
+      title: 'Author List',
+      description: 'List of all authors in the library',
+      authors: Testudo::Model::Author.order(:sort)
+    }
   end
 
   get '/:id' do |id|
@@ -14,7 +14,6 @@ namespace '/authors' do
     param :items, Integer, required: false
 
     author = Testudo::Model::Author[id]
-
     halt 404 unless author
 
     desc = "Books by #{author.name}"
