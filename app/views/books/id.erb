@@ -10,16 +10,16 @@
     </header>
     <% if book.formats.count > 0 %>
     <p class="book-download-links">
-      <%= erb(:"_partials/book_download_links", {}, { book: book }) %>
+      <%= erb(:"_partials/book_download_links", locals: { book: book }) %>
     </p>
     <% end %>
     <p class="book-authors">
-      By <%= erb(:"_partials/book_author_list", {}, { authors: book.authors }) %>
+      By <%= erb(:"_partials/book_author_list", locals: { authors: book.authors }) %>
     </p>
     <% if book.series.count > 0 %>
     <% series = book.series[0] %>
     <p class="book-series">
-      <%= erb(:"_partials/book_series_link", {}, { book: book }) %>
+      <%= erb(:"_partials/book_series_link", locals: { book: book }) %>
     </p>
     <% end %>
     <% if book.comment %>

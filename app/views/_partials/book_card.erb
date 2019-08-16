@@ -5,12 +5,12 @@
   </a>
   <h5 class="book-card-title"><%= book.title %></h5>
   <p>
-    By <%= erb(:"_partials/book_author_list", {}, { authors: book.authors }) %>
+    By <%= erb(:"_partials/book_author_list", locals: { authors: book.authors }) %>
   </p>
   <% if book.series.size > 0 %>
   <p>
     <% series = book.series[0] %>
-    <%= erb(:"_partials/book_series_link", {}, { book: book }) %>
+    <%= erb(:"_partials/book_series_link", locals: { book: book }) %>
   </p>
   <% end %>
 </section>

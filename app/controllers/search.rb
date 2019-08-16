@@ -8,7 +8,10 @@ namespace '/search' do
     query = params["query"]
 
     if query.nil? or query.empty?
-      erb :search
+      erb :search, locals: {
+            title: 'Search',
+            description: 'Search',
+          }
     else
       book_ids = db[:fts_short_index]
                    .select(:book_id)
