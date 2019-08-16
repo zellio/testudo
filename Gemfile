@@ -7,6 +7,7 @@ group :development, :test do
 end
 
 gem 'pagy', '~> 3.4'
+gem 'rubyzip', '~> 1.0'
 gem 'sqlite3', '~> 1.4'
 gem 'sequel', '~> 5.22'
 gem 'sinatra', '~> 1.4'

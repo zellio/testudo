@@ -52,7 +52,8 @@ a:hover {
     max-height: 220px;
 }
 
-.book-cover-container {
++.book-cover-container,
++.book-cover-container .book-cover-frame {
     margin-bottom: 1rem;
 }
 .book-cover {

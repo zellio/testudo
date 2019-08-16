@@ -72,4 +72,39 @@ namespace '/books' do
 
     send_file(filepath, type: type, filename: filename)
   end
+
+  get '/:id/read' do |id|
+    param :id, Integer, required: true
+
+    book = Testudo::Model::Book[id]
+    halt 404 unless book
+
+    format = Testudo::Model::Datum[book: id, format: 'EPUB']
+    halt 404 unless format
+
+    erb :"books/id/read", locals: {
+    }
+  end
+
+  get '/:id/read/*' do |id, path|
+    param :id, Integer, required: true
+
+    format_str = 'epub'
+
+    book = Testudo::Model::Book[id]
+    halt 404 unless book
+
+    format = Testudo::Model::Datum[book: id, format: format_str.upcase]
+    halt 404 unless format
+
+    filename = "#{format.name}.#{format_str}"
+    filepath = File.join(settings.library, book.path, filename)
+    halt 404 unless File.readable?(filepath)
+
+    epub_archive = Zip::File.open(filepath)
+    entry = epub_archive.find { |e| e.name == path }
+    halt 404 unless entry
+
+    entry.get_input_stream.read
+  end
 end
