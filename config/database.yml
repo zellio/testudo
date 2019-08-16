@@ -1,6 +1,6 @@
 ---
 development: &development
-  library: db
+  library: library
 
 test:
   <<: *development

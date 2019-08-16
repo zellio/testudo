@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id" version="2.0">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">1</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">a38a20cf-78fb-4f76-9296-a03c52048dbb</dc:identifier>
+        <dc:title>Much Ado About Nothing</dc:title>
+        <dc:creator opf:file-as="Shakespeare, William" opf:role="aut">William Shakespeare</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (3.46.0) [https://calibre-ebook.com]</dc:contributor>
+        <dc:date>2004-01-02T00:00:00+00:00</dc:date>
+        <dc:description>&lt;p&gt;&lt;em&gt;Much Ado About Nothing&lt;/em&gt; includes two quite different stories of romantic love. Hero and Claudio fall in love almost at first sight, but an outsider, Don John, strikes out at their happiness. Beatrice and Benedick are kept apart by pride and mutual antagonism until others decide to play Cupid.  &lt;/p&gt;
+&lt;p&gt;The authoritative edition of &lt;em&gt;Much Ado About Nothing&lt;/em&gt; from The Folger Shakespeare Library, the trusted and widely used Shakespeare series for students and general readers, includes:  &lt;/p&gt;
+&lt;p&gt;-Freshly edited text based on the best early printed version of the play  &lt;/p&gt;
+&lt;p&gt;-Full explanatory notes conveniently placed on pages facing the text of the play  &lt;/p&gt;
+&lt;p&gt;-Scene-by-scene plot summaries  &lt;/p&gt;
+&lt;p&gt;-A key to the play’s famous lines and phrases  &lt;/p&gt;
+&lt;p&gt;-An introduction to reading Shakespeare’s language  &lt;/p&gt;
+&lt;p&gt;-An essay by a leading Shakespeare scholar providing a modern perspective on the play  &lt;/p&gt;
+&lt;p&gt;-Fresh images from the Folger Shakespeare Library’s vast holdings of rare books  &lt;/p&gt;
+&lt;p&gt;-An annotated guide to further reading  &lt;/p&gt;
+&lt;p&gt;Essay by Gail Kern Paster  &lt;/p&gt;
+&lt;p&gt;The Folger Shakespeare Library in Washington, DC, is home to the world’s largest collection of Shakespeare’s printed works, and a magnet for Shakespeare scholars from around the globe. In addition to exhibitions open to the public throughout the year, the Folger offers a full calendar of performances and programs. For more information, visit Folger.edu.
+**&lt;/p&gt;</dc:description>
+        <dc:publisher>Washington Square Press</dc:publisher>
+        <dc:identifier opf:scheme="AMAZON">0743482751</dc:identifier>
+        <dc:identifier opf:scheme="ISBN">9780743482752</dc:identifier>
+        <dc:identifier opf:scheme="URI">http://www.gutenberg.org/ebooks/1520</dc:identifier>
+        <dc:language>eng</dc:language>
+        <dc:subject>Rejection (Psychology) -- Drama</dc:subject>
+        <dc:subject>Messina (Italy) -- Drama</dc:subject>
+        <dc:subject>Courtship -- Drama</dc:subject>
+        <dc:subject>Comedies</dc:subject>
+        <dc:subject>Conspiracies -- Drama</dc:subject>
+        <meta content="{&quot;William Shakespeare&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="2019-08-16T22:23:51.186418+00:00" name="calibre:timestamp"/>
+        <meta content="Much Ado About Nothing" name="calibre:title_sort"/>
+    </metadata>
+    <guide>
+        <reference href="cover.jpg" title="Cover" type="cover"/>
+    </guide>
+</package>
