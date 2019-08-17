@@ -109,6 +109,12 @@ namespace '/books' do
     entry = epub_archive.find { |e| e.name == path }
     halt 404 unless entry
 
-    entry.get_input_stream.read
+    content = entry.get_input_stream.read
+
+    etag Digest::SHA1.hexdigest(content)
+    cache_control :public, :must_revalidate, max_age: 2592000
+    content_type settings.mimetypes[File.extname(path)[1..-1]]
+
+    content
   end
 end
