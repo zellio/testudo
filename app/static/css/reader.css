@@ -1,40 +1,35 @@
 html,
 body,
 main {
-  height: 100%;
-  position: relative;
+    height: 100%;
+    position: relative;
 }
 
 .container,
 .book-display {
-        height: 100%;
+    height: 100%;
     min-height: 100%;
-        display: flex;
-        flex-direction: column
+    display: flex;
+    flex-direction: column
 }
 
 .book-display {
-  background: #fff;
+    background: #fff;
 }
 
 .arrow {
-  position: absolute;
-  z-index:10;
-  height:100%;
-  width: 25%;
-  top: 0;
-  padding-left: 20px;
-  color: transparent;
-}
-
-.arrow:hover {
-  background:rgba(153, 153, 153, 0.4);
-  color: rgba(93, 93, 93, 0.6);
-  transition-duration: 0.2s;
-}
-
-.arrow:hover span {
-  display: block;
+    position: absolute;
+    z-index:10;
+    height:100%;
+    width: 25%;
+    top: 0;
+    padding-left: 20px;
+    background:rgba(153, 153, 153, 0.4);
+    color: rgba(93, 93, 93, 0.6);
+    opacity: 0;
+    transition: opacity 0.2s;
+    cursor: pointer;
+    user-select: none;
 }
 
 .arrow span {
@@ -42,10 +37,11 @@ main {
     top:50%;
     transform:translate(0, -50%);
     font-size: 80pt;
+    display: block;
 }
 
 #prev.arrow {
-  left: 0;
+    left: 0;
 }
 
 #prev.arrow span {
@@ -53,9 +49,13 @@ main {
 }
 
 #next.arrow {
-  right: 0;
+    right: 0;
 }
 
 #next.arrow span {
     right: 25px;
+}
+
+.custom-select {
+    margin-bottom: 1rem;
 }
