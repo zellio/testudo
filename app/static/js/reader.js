@@ -70,6 +70,11 @@ function run() {
         parent.$(parent.document).trigger($.Event('keydown', event));
     });
 
+    epub_reader.rendition.on("relocated", (location) => {
+        let cfi = location.start.cfi;
+        window.location.hash = cfi;
+    });
+
     // rendition.on("relocated", (location) => {
     //   console.log("rendition:relocated");
     //   console.log(location);
