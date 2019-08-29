@@ -10,7 +10,7 @@ function suppress_event(event) {
 var EpubReader = (function() {
     function EpubReader() {
         this.url = new URL(document.URL);
-        this.currentLocationCfi = this.url.hash.slice(1);
+        this.currentLocationCfi = new ePub.CFI(this.url.hash.slice(1));
         this.book = ePub(this.url.pathname + "/");
         this.rendition = this.book.renderTo("display", {
             width: "100%",
@@ -20,11 +20,11 @@ var EpubReader = (function() {
     }
 
     function prev_page(event) {
-        this.rendition.prev();
+        return this.rendition.prev();
     }
 
     function next_page(event) {
-        this.rendition.next();
+        return this.rendition.next();
     }
 
     function draw(target) {
@@ -40,7 +40,7 @@ var EpubReader = (function() {
     return EpubReader;
 }());
 
-function run() {
+$(document).ready(() => {
     const KBD_ARROW_DIRECTION = {
         rtl: { prev: "ArrowRight", next: "ArrowLeft" },
         ltr: { prev: "ArrowLeft", next: "ArrowRight" },
@@ -49,25 +49,37 @@ function run() {
     let epub_reader = new EpubReader();
 
     epub_reader.book.loaded.navigation.then((navigation) => {
-        $('nav').html($('<select/>', {
-            class: "custom-select",
-            html: navigation.toc.map((chapter) => {
-                return $('<option/>', {
-                    id: "toc-li-" + chapter.id,
-                    class: "toc-list-item",
-                    value: chapter.href,
+        let nav_list = [];
+        function _load_list(items) {
+            items.forEach((i) => {
+                nav_list.push(i);
+                i.subitems && i.subitems.length > 0 && _load_list(i.subitems);
+            });
+        }
+        _load_list(navigation.toc);
+        epub_reader.chapter_list = nav_list;
+
+        $("nav").html($("<select/>", {
+            id: "toc-selector",
+            class: "custom-select custom-control-inline",
+            html: epub_reader.chapter_list.map((chapter) => {
+                return $("<option/>", {
+                    id: "toc-option-" + chapter.id,
                     text: chapter.label,
+                    value: (new URL(chapter.href, "file://")),
                 });
             }),
             change: (event) => {
-                let target = decodeURIComponent(event.currentTarget.value);
-                epub_reader.draw(target);
+                let url = new URL(event.currentTarget.value),
+                    target = decodeURIComponent(url.pathname).slice(1) + url.hash;
+                epub_reader.draw(target)
+                suppress_event(event);
             },
         }));
     });
 
     epub_reader.rendition.on("keydown", (event) => {
-        parent.$(parent.document).trigger($.Event('keydown', event));
+        parent.$(parent.document).trigger($.Event("keydown", event));
     });
 
     epub_reader.rendition.on("relocated", (location) => {
@@ -81,14 +93,14 @@ function run() {
     //   let cfi = location.start.cfi;
     //   currentLocationCfi = cfi;
     //   window.location.hash = cfi;
-    //   history.pushState({}, '', "#" + cfi);
+    //   history.pushState({}, "", "#" + cfi);
     // });
 
     $(".arrow").on("touchstart mousedown", (event) => {
-        let arrow_button = $(event.currentTarget);
-        arrow_button.css({'opacity': 1});
-        arrow_button.on("touchend mouseup", (event) => {
-            setTimeout(() => {arrow_button.css({'opacity': 0})}, 100);
+        let $arrow_button = $(event.currentTarget);
+        $arrow_button.css({"opacity": 1});
+        $arrow_button.on("touchend mouseup", (event) => {
+            setTimeout(() => {$arrow_button.css({"opacity": 0})}, 100);
         });
     });
 
@@ -110,4 +122,4 @@ function run() {
     } else {
         epub_reader.draw();
     }
-}
+});
