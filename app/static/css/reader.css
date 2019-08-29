@@ -18,42 +18,33 @@ main {
 }
 
 .arrow {
+    display: table;
     position: absolute;
-    z-index:10;
-    height:100%;
-    width: 25%;
     top: 0;
-    padding-left: 20px;
+    z-index: 10;
+    height: 100%;
+    width: 33%;
     background:rgba(153, 153, 153, 0.4);
     color: rgba(93, 93, 93, 0.6);
     opacity: 0;
     transition: opacity 0.2s;
+    font-size: 4rem;
+    text-align: center;
     cursor: pointer;
     user-select: none;
 }
 
-.arrow span {
-    position: absolute;
-    top:50%;
-    transform:translate(0, -50%);
-    font-size: 80pt;
-    display: block;
+.arrow i {
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #prev.arrow {
     left: 0;
 }
 
-#prev.arrow span {
-    left: 25px;
-}
-
 #next.arrow {
     right: 0;
-}
-
-#next.arrow span {
-    right: 25px;
 }
 
 .custom-select {
