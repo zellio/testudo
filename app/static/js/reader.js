@@ -30,7 +30,12 @@ var EpubReader = (function() {
     }
 
     function draw(target) {
-        return this.display = this.rendition.display(target);
+        target = target || this.currentLocationCfi.str;
+        if (target) {
+            this.display = this.rendition.display(target);
+        } else {
+            this.display = this.rendition.display();
+        }
     }
 
     EpubReader.prototype = {
@@ -51,30 +56,18 @@ $(document).ready(() => {
     let epub_reader = new EpubReader();
 
     epub_reader.book.loaded.navigation.then((navigation) => {
-        let nav_list = [];
-        function _load_list(items) {
-            items.forEach((i) => {
-                nav_list.push(i);
-                i.subitems && i.subitems.length > 0 && _load_list(i.subitems);
-            });
-        }
-        _load_list(navigation.toc);
-        epub_reader.chapter_list = nav_list;
-
         $("nav").html($("<select/>", {
             id: "toc-selector",
             class: "custom-select custom-control-inline",
-            html: epub_reader.chapter_list.map((chapter) => {
+            html: navigation.toc.map((chapter, index) => {
                 return $("<option/>", {
                     id: "toc-option-" + chapter.id,
-                    text: chapter.label,
-                    value: (new URL(chapter.href, "file://")),
+                    label: chapter.label,
+                    value: decodeURIComponent(chapter.href),
                 });
             }),
             change: (event) => {
-                let url = new URL(event.currentTarget.value),
-                    target = decodeURIComponent(url.pathname).slice(1) + url.hash;
-                epub_reader.draw(target)
+                epub_reader.draw(event.currentTarget.value);
                 suppress_event(event);
             },
         }));
@@ -86,17 +79,15 @@ $(document).ready(() => {
 
     epub_reader.rendition.on("relocated", (location) => {
         let cfi = location.start.cfi;
+        epub_reader.currentLocationCfi = new ePub.CFI(cfi);
         window.location.hash = cfi;
-    });
 
-    // rendition.on("relocated", (location) => {
-    //   console.log("rendition:relocated");
-    //   console.log(location);
-    //   let cfi = location.start.cfi;
-    //   currentLocationCfi = cfi;
-    //   window.location.hash = cfi;
-    //   history.pushState({}, "", "#" + cfi);
-    // });
+        let $option = $('option[value="' + location.start.href + '"]');
+        if ($option.length > 0) {
+            $('option').removeAttr('selected');
+            $option.attr('selected', true);
+        }
+    });
 
     $(".arrow").on("touchstart mousedown", (event) => {
         let $arrow_button = $(event.currentTarget);
@@ -118,10 +109,5 @@ $(document).ready(() => {
         }
     });
 
-    let currentLocationCfi = epub_reader.url.hash.slice(1);
-    if (currentLocationCfi) {
-        epub_reader.draw(currentLocationCfi);
-    } else {
-        epub_reader.draw();
-    }
+    epub_reader.draw();
 });
