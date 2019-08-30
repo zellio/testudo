@@ -1,3 +1,5 @@
+"use strict";
+
 function is_function(fn) {
     return !!(fn && fn.constructor && fn.call && fn.apply);
 }
