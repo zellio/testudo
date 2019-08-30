@@ -8,6 +8,7 @@ require 'sinatra/param'
 require 'sinatra/sequel_connector'
 
 require 'pagy'
+require 'zip'
 
 module Testudo
   class Application < Sinatra::Base
