@@ -64,6 +64,7 @@ $(document).ready(() => {
                     id: "toc-option-" + chapter.id,
                     label: chapter.label,
                     value: decodeURIComponent(chapter.href),
+                    text: chapter.label,
                 });
             }),
             change: (event) => {
