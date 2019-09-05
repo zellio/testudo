@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
 require 'sinatra/config_file'
 require 'sinatra/drumkit'
@@ -6,6 +8,7 @@ require 'sinatra/param'
 require 'sinatra/sequel_connector'
 
 require 'pagy'
+require 'zip'
 
 module Testudo
   class Application < Sinatra::Base
@@ -33,10 +36,10 @@ module Testudo
 
     private
 
-    def pagy_get_vars(collection, vars)
+    def pagy_get_vars(collection, _vars)
       { count: collection.count,
-        page: params["page"],
-        items: params["items"] || 24, }
+        page: params['page'],
+        items: params['items'] || 24 }
     end
   end
 end

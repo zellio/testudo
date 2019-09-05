@@ -1,0 +1,52 @@
+html,
+body,
+main {
+    height: 100%;
+    position: relative;
+}
+
+.container,
+.book-display {
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column
+}
+
+.book-display {
+    background: #fff;
+}
+
+.arrow {
+    display: table;
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    height: 100%;
+    width: 33%;
+    background:rgba(153, 153, 153, 0.4);
+    color: rgba(93, 93, 93, 0.6);
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 4rem;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.arrow i {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#prev.arrow {
+    left: 0;
+}
+
+#next.arrow {
+    right: 0;
+}
+
+.custom-select {
+    margin-bottom: 1rem;
+}

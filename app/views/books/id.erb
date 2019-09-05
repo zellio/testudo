@@ -3,6 +3,7 @@
     <a href="<%= url("/books/#{book.id}") %>">
       <img class="book-cover book-cover-frame" src="<%= url("/books/#{book.id}/cover") %>" alt="<%= book.title %> Cover" />
     </a>
+    <a class="btn btn-info" href="<%= url("/books/#{book.id}/read") %>">Read Online</a>
   </section>
   <section class="book-info col-md-8">
     <header>
