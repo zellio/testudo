@@ -16,7 +16,6 @@ gem 'sinatra', '~> 1.4'
 gem 'sinatra-contrib', '~> 1.4'
 gem 'sinatra-drumkit', '~> 0.1'
 gem 'sinatra-param', '~> 1.6'
-gem 'sqlite3', '~> 1.4'
 
 group :production do
   gem 'puma', '~> 4.0'
