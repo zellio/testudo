@@ -98,3 +98,7 @@ a:hover {
     border-color: #3e8274;
     cursor: pointer;
 }
+
+.latest-additions-header {
+    margin-bottom: 20px;
+}
