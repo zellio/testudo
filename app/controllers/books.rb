@@ -36,7 +36,7 @@ namespace '/books' do
     book = Testudo::Model::Book[id]
     halt 404 unless book
 
-    filepath = File.join(settings.library, book.path, 'cover.jpg')
+    filepath = File.join(settings.library['path'], book.path, 'cover.jpg')
     halt 404 unless File.readable?(filepath)
 
     etag Digest::SHA1.file(filepath)
@@ -57,7 +57,7 @@ namespace '/books' do
     format_str = format.format.downcase
     type = settings.mimetypes[format_str]
     filename = "#{format.name}.#{format_str}"
-    filepath = File.join(settings.library, book.path, filename)
+    filepath = File.join(settings.library['path'], book.path, filename)
 
     etag Digest::SHA1.file(filepath)
     cache_control :public, :must_revalidate, max_age: 2592000
@@ -94,7 +94,7 @@ namespace '/books' do
     halt 404 unless format
 
     filename = "#{format.name}.#{format_str}"
-    filepath = File.join(settings.library, book.path, filename)
+    filepath = File.join(settings.library['path'], book.path, filename)
     halt 404 unless File.readable?(filepath)
 
     epub_archive = Zip::File.open(filepath)

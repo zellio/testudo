@@ -22,7 +22,7 @@ module Testudo
     config_file [File.join(config_dir, '*.yml')]
 
     register Sinatra::SequelConnector
-    set :db, "sqlite://#{settings.library}/metadata.db"
+    set :db, "sqlite://#{settings.library['path']}/metadata.db"
 
     helpers Sinatra::Param
 
