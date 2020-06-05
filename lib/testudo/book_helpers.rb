@@ -6,7 +6,7 @@ module Sinatra
   module TestudoBookHelpers
     def book_cover_uri(book)
       library = { 'remote': false, 'path': '' }
-      library.merge!(settings.reponds_to?(:library) ? settings.library : {})
+      library.merge!(settings.respond_to?(:library) ? settings.library : {})
 
       if library['remote']
         File.join(book.path, 'cover.jpg')
@@ -17,7 +17,7 @@ module Sinatra
 
     def book_download_uri(book, format)
       library = { 'remote': false, 'path': '' }
-      library.merge!(settings.reponds_to?(:library) ? settings.library : {})
+      library.merge!(settings.respond_to?(:library) ? settings.library : {})
 
       if library['remote']
         format_str = format.format.downcase

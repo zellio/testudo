@@ -6,6 +6,7 @@ require 'sinatra/drumkit'
 require 'sinatra/namespace'
 require 'sinatra/param'
 require 'sinatra/sequel_connector'
+require 'sinatra/remote_uri'
 
 require 'pagy'
 require 'zip'
@@ -27,6 +28,7 @@ module Testudo
     helpers Sinatra::Param
     helpers Sinatra::TestudoBookHelpers
 
+    register Sinatra::RemoteUri
     register Sinatra::Namespace
     register Sinatra::Drumkit
 

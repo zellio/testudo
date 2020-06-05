@@ -2,7 +2,7 @@
 development: &development
   library:
     path: library
-    remote: false
+    remote: true
 
 test:
   <<: *development
