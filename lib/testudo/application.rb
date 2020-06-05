@@ -25,6 +25,7 @@ module Testudo
     set :db, "sqlite://#{settings.library['path']}/metadata.db"
 
     helpers Sinatra::Param
+    helpers Sinatra::TestudoBookHelpers
 
     register Sinatra::Namespace
     register Sinatra::Drumkit
