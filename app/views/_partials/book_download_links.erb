@@ -1,5 +1,5 @@
 <% book.formats.select do |format|
   settings.mimetypes[format.format.downcase]
 end.each do |format| %>
-<a class="btn btn-info" href="<%= path_uri(settings.library['remote'] && settings.library['path'], book_download_uri(book, format)) %>"><%= format.format.upcase %></a>
+<a class="btn btn-info" href="<%= path_uri(settings.library['remote'] && settings.library['path'], book_download_uri(book, format), settings.library['secure_remote']) %>"><%= format.format.upcase %></a>
 <% end %>

@@ -1,6 +1,6 @@
 <link href="<%= url('/css/reader.css') %>" rel="stylesheet" media="screen">
 
-<input type="hidden" id="reader-source-url" name="reader-source-url" value="<%= path_uri(settings.library['remote'] && settings.library['path'], book_download_uri(book, format)) %>">
+<input type="hidden" id="reader-source-url" name="reader-source-url" value="<%= path_uri(settings.library['remote'] && settings.library['path'], book_download_uri(book, format), settings.library['secure_remote']) %>">
 
 <div id="prev" class="arrow"><i class="fa fa-chevron-left"></i></div>
 <div id="display" class="book-display book-cover-frame"></div>
