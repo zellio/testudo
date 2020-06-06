@@ -7,6 +7,7 @@ require 'sinatra/namespace'
 require 'sinatra/param'
 require 'sinatra/sequel_connector'
 require 'sinatra/remote_uri'
+require 'sinatra/testudo_book_helpers'
 require 'sinatra/testudo_database_cache'
 
 require 'pagy'
