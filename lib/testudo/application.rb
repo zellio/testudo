@@ -6,6 +6,9 @@ require 'sinatra/drumkit'
 require 'sinatra/namespace'
 require 'sinatra/param'
 require 'sinatra/sequel_connector'
+require 'sinatra/remote_uri'
+require 'sinatra/testudo_book_helpers'
+require 'sinatra/testudo_database_cache'
 
 require 'pagy'
 require 'zip'
@@ -21,11 +24,16 @@ module Testudo
     register Sinatra::ConfigFile
     config_file [File.join(config_dir, '*.yml')]
 
+    register Sinatra::TestudoDatabaseCache
+    tmpdir = cache_database
+
     register Sinatra::SequelConnector
-    set :db, "sqlite://#{settings.library}/metadata.db"
+    set :db, "sqlite://#{tmpdir}/metadata.db"
 
     helpers Sinatra::Param
+    helpers Sinatra::TestudoBookHelpers
 
+    register Sinatra::RemoteUri
     register Sinatra::Namespace
     register Sinatra::Drumkit
 

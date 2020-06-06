@@ -1,7 +1,7 @@
 <article class="row">
   <section class="book-cover-container col-md-4 text-center">
     <a href="<%= url("/books/#{book.id}") %>">
-      <img class="book-cover book-cover-frame" src="<%= url("/books/#{book.id}/cover") %>" alt="<%= book.title %> Cover" />
+      <img class="book-cover book-cover-frame" src="<%= path_uri(settings.library['remote'] && settings.library['path'], book_cover_uri(book)) %>" alt="<%= book.title %> Cover" />
     </a>
     <a class="btn btn-info" href="<%= url("/books/#{book.id}/read") %>">Read Online</a>
   </section>
