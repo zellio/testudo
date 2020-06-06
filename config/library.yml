@@ -3,6 +3,7 @@ development: &development
   library:
     path: library
     remote: false
+    tmpdir: /tmp
 
 test:
   <<: *development

@@ -29,7 +29,7 @@ module Sinatra
     end
 
     def cache_database
-      tmpdir = Dir.mktmpdir('testudo')
+      tmpdir = Dir.mktmpdir('testudo-', settings.library['tmpdir'])
       fetch_database(tmpdir)
       at_exit do
         File.unlink(File.join(tmpdir, 'metadata.db'))
