@@ -1,6 +1,8 @@
 ---
 development: &development
-  library: library
+  library:
+    path: library
+    remote: false
 
 test:
   <<: *development

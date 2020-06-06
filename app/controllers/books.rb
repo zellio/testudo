@@ -36,7 +36,7 @@ namespace '/books' do
     book = Testudo::Model::Book[id]
     halt 404 unless book
 
-    filepath = File.join(settings.library, book.path, 'cover.jpg')
+    filepath = File.join(settings.library['path'], book.path, 'cover.jpg')
     halt 404 unless File.readable?(filepath)
 
     etag Digest::SHA1.file(filepath)
@@ -45,24 +45,26 @@ namespace '/books' do
     send_file(filepath, type: 'image/jpeg', filename: 'cover.jpg')
   end
 
-  get '/:id/download/:format' do |id, format|
-    param :id, Integer, required: true
+  ['/:id/download/:format', '/:id/download.:format'].each do |path|
+    get path do |id, format|
+      param :id, Integer, required: true
 
-    book = Testudo::Model::Book[id]
-    halt 404 unless book
+      book = Testudo::Model::Book[id]
+      halt 404 unless book
 
-    format = Testudo::Model::Datum[book: id, format: format.upcase]
-    halt 404 unless format
+      format = Testudo::Model::Datum[book: id, format: format.upcase]
+      halt 404 unless format
 
-    format_str = format.format.downcase
-    type = settings.mimetypes[format_str]
-    filename = "#{format.name}.#{format_str}"
-    filepath = File.join(settings.library, book.path, filename)
+      format_str = format.format.downcase
+      type = settings.mimetypes[format_str]
+      filename = "#{format.name}.#{format_str}"
+      filepath = File.join(settings.library['path'], book.path, filename)
 
-    etag Digest::SHA1.file(filepath)
-    cache_control :public, :must_revalidate, max_age: 2592000
+      etag Digest::SHA1.file(filepath)
+      cache_control :public, :must_revalidate, max_age: 2592000
 
-    send_file(filepath, type: type, filename: filename)
+      send_file(filepath, type: type, filename: filename)
+    end
   end
 
   get '/:id/read' do |id|
@@ -78,7 +80,9 @@ namespace '/books' do
 
     erb :"books/id/read", locals: {
       title: desc,
-      description: desc
+      description: desc,
+      book: book,
+      format: format,
     }
   end
 
@@ -94,7 +98,7 @@ namespace '/books' do
     halt 404 unless format
 
     filename = "#{format.name}.#{format_str}"
-    filepath = File.join(settings.library, book.path, filename)
+    filepath = File.join(settings.library['path'], book.path, filename)
     halt 404 unless File.readable?(filepath)
 
     epub_archive = Zip::File.open(filepath)
