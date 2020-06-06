@@ -76,16 +76,26 @@ $(document).ready(() => {
     let epub_reader = new EpubReader();
 
     epub_reader.book.then((book) => {
+        let section_keys = {};
+        Object.keys(book.sections.spineByHref).forEach((key) => {
+            let index = book.sections.spineByHref[key];
+            section_keys[index] = section_keys[index] || {}
+            section_keys[index][key] = true;
+        });
+
+
         $("nav").html($("<select/>", {
             id: "toc-selector",
             class: "custom-select custom-control-inline",
             html: book.sections.items.map((section, index) => {
                 let toc_entry = book.navigation.toc.find((element) => {
-                    let element_href = element.href;
+                    let element_href = decodeURIComponent(element.href);
                     if (element_href.indexOf('#') > 0) {
                         element_href = element_href.substring(0, element_href.lastIndexOf('#'));
                     }
-                    return decodeURIComponent(element_href) == decodeURIComponent(section.href);
+                    let possible_keys = section_keys[index];
+                    return possible_keys[element_href] || possible_keys[element_href.substring(1)];
+
                 });
 
                 let title = toc_entry ? toc_entry.title.trim() : "Entry " + index;
