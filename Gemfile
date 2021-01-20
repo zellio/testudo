@@ -17,6 +17,8 @@ gem 'sinatra', '~> 1.4'
 gem 'sinatra-contrib', '~> 1.4'
 gem 'sinatra-drumkit', '~> 0.1'
 gem 'sinatra-param', '~> 1.6'
+gem 'nokogiri', '~> 1.11'
+gem 'json', '~> 2.5'
 
 group :production do
   gem 'puma', '~> 4.0'

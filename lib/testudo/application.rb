@@ -16,6 +16,9 @@ require 'active_support/core_ext/string/inflections'
 
 require 'pagy'
 require 'zip'
+require 'json'
+require 'nokogiri'
+
 
 module Testudo
   class NilObject
@@ -44,6 +47,7 @@ module Testudo
     register Sinatra::SequelConnector
     set :db, "sqlite://#{tmpdir}/metadata.db"
     Sequel::Model.plugin :json_serializer
+    Sequel::Model.plugin :xml_serializer
 
     helpers Sinatra::Param
     helpers Sinatra::TestudoBookHelpers

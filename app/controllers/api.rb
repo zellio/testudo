@@ -2,17 +2,25 @@
 
 namespace '/api' do
   namespace '/v0.1.0' do
-    get '/:type', provides: [:json] do |type|
+    respond_to :json, :xml
+
+    get '/:type' do |type|
       param :type, String, required: true
 
       model = noun_to_model(type)
 
       halt 404 if model.nil?
 
-      respond_with(model.all)
+      if params['fields']
+        respond_with(
+          model.all.map(&:values).map { |h| h.slice(*params['fields'].split(',').map(&:to_sym)) }
+        )
+      else
+        respond_with(model.all)
+      end
     end
 
-    get '/:type/:id', provides: [:json] do |type, id|
+    get '/:type/:id' do |type, id|
       param :type, String, required: true
       param :id, Integer, required: true
 
@@ -21,7 +29,13 @@ namespace '/api' do
 
       halt 404 if object.nil?
 
-      respond_with(object)
+      if params['fields']
+        respond_with(
+          object.values.slice(*params['fields'].split(',').map(&:to_sym))
+        )
+      else
+        respond_with(object)
+      end
     end
   end
 end
