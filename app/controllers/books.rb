@@ -55,15 +55,25 @@ namespace '/books' do
       format = Testudo::Model::Datum[book: id, format: format.upcase]
       halt 404 unless format
 
-      format_str = format.format.downcase
-      type = settings.mimetypes[format_str]
-      filename = "#{format.name}.#{format_str}"
-      filepath = File.join(settings.library['path'], book.path, filename)
+      library = { "remote" => true, "path" => 'google.com' }
+      library.merge!(settings.respond_to?(:library) ? settings.library : {})
 
-      etag Digest::SHA1.file(filepath)
-      cache_control :public, :must_revalidate, max_age: 2592000
+      if library['remote']
+        format_str = format.format.downcase
+        filename = "#{format.name}.#{format_str}"
+        remote_path = File.join(book.path, filename)
+        redirect path_uri(library['path'], remote_path, library['secure_remote'], true)
+      else
+        format_str = format.format.downcase
+        type = settings.mimetypes[format_str]
+        filename = "#{format.name}.#{format_str}"
+        filepath = File.join(settings.library['path'], book.path, filename)
 
-      send_file(filepath, type: type, filename: filename)
+        etag Digest::SHA1.file(filepath)
+        cache_control :public, :must_revalidate, max_age: 2592000
+
+        send_file(filepath, type: type, filename: filename)
+      end
     end
   end
 
