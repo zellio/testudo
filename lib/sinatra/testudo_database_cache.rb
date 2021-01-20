@@ -9,7 +9,7 @@ module Sinatra
   module TestudoDatabaseCache
     def download(url, path)
       url = "http://#{url}" unless File.exist?(url)
-      case io = open(url)
+      case io = URI.open(url)
       when StringIO
         File.open(path, 'w') { |fh| fh.write(io) }
       when Tempfile
