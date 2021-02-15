@@ -55,7 +55,7 @@ namespace '/books' do
       format = Testudo::Model::Datum[book: id, format: format.upcase]
       halt 404 unless format
 
-      library = { "remote" => true, "path" => 'google.com' }
+      library = { 'remote' => true, 'path' => 'google.com' }
       library.merge!(settings.respond_to?(:library) ? settings.library : {})
 
       if library['remote']
@@ -92,7 +92,7 @@ namespace '/books' do
       title: desc,
       description: desc,
       book: book,
-      format: format,
+      format: format
     }
   end
 
@@ -119,7 +119,7 @@ namespace '/books' do
 
     etag Digest::SHA1.hexdigest(content)
     cache_control :public, :must_revalidate, max_age: 2592000
-    content_type settings.mimetypes[File.extname(path)[1..-1]]
+    content_type settings.mimetypes[File.extname(path)[1..]]
 
     content
   end
