@@ -55,7 +55,7 @@ namespace '/books' do
       format = Testudo::Model::Datum[book: id, format: format.upcase]
       halt 404 unless format
 
-      library = { "remote" => true, "path" => 'google.com' }
+      library = { 'remote' => true, 'path' => 'google.com' }
       library.merge!(settings.respond_to?(:library) ? settings.library : {})
 
       if library['remote']
@@ -92,7 +92,7 @@ namespace '/books' do
       title: desc,
       description: desc,
       book: book,
-      format: format,
+      format: format
     }
   end
 
