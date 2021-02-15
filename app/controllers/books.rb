@@ -119,7 +119,7 @@ namespace '/books' do
 
     etag Digest::SHA1.hexdigest(content)
     cache_control :public, :must_revalidate, max_age: 2592000
-    content_type settings.mimetypes[File.extname(path)[1..-1]]
+    content_type settings.mimetypes[File.extname(path)[1..]]
 
     content
   end

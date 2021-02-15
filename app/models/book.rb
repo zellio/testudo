@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Testudo::Model::Book < Sequel::Model
   one_to_many :books_authors_link, key: :book
   many_to_many :authors,
