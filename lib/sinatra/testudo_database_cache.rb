@@ -18,7 +18,7 @@ module Sinatra
       when File
         FileUtils.cp(io.path, path)
       else
-        raise "Unhandled type: " + io.class
+        raise "Unhandled type: #{io.class}"
       end
     end
 

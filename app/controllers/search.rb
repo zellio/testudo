@@ -15,8 +15,8 @@ namespace '/search' do
       }
     else
       book_ids = db[:fts_short_index]
-        .select(:book_id)
-        .where(Sequel.lit("\`fts_short_index\` MATCH '#{query}'"))
+                 .select(:book_id)
+                 .where(Sequel.lit("\`fts_short_index\` MATCH '#{query}'"))
 
       pagy, books = pagy(Testudo::Model::Book.where(id: book_ids))
 

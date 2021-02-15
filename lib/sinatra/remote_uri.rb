@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'sinatra/base'
 
 module Sinatra
@@ -6,7 +7,7 @@ module Sinatra
     module Helpers
       def path_uri(path = nil, addr = nil, secure_remote = false, absolute = true, add_script = true)
         if path
-          return addr if addr =~ /\A[a-z][a-z0-9\+\.\-]*:/i
+          return addr if addr =~ /\A[a-z][a-z0-9+.\-]*:/i
 
           uri = ["http#{'s' if secure_remote}://#{path}"]
           uri << request.script_name.to_s if add_script

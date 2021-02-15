@@ -19,10 +19,9 @@ require 'zip'
 require 'json'
 require 'nokogiri'
 
-
 module Testudo
   class NilObject
-    def method_missing(*args, &block)
+    def method_missing(*_args)
       self
     end
 
@@ -71,9 +70,9 @@ module Testudo
     end
 
     def noun_to_model(noun)
-      module_name = noun.split('_').map(&:capitalize).map(&:singularize).join()
+      module_name = noun.split('_').map(&:capitalize).map(&:singularize).join
       Testudo::Model.const_get(module_name)
-    rescue
+    rescue StandardError
       Testudo::NilObject.new
     end
   end
