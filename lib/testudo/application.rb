@@ -20,16 +20,6 @@ require 'json'
 require 'nokogiri'
 
 module Testudo
-  class NilObject
-    def method_missing(*_args)
-      self
-    end
-
-    def nil?
-      true
-    end
-  end
-
   class Application < Sinatra::Base
     set :root, -> { File.expand_path(File.join(__dir__, '..', '..')) }
     set :app_dir, -> { File.join(root, 'app') }
@@ -67,13 +57,6 @@ module Testudo
       { count: collection.count,
         page: params['page'],
         items: params['items'] || 24 }
-    end
-
-    def noun_to_model(noun)
-      module_name = noun.split('_').map(&:capitalize).map(&:singularize).join
-      Testudo::Model.const_get(module_name)
-    rescue StandardError
-      Testudo::NilObject.new
     end
   end
 end
