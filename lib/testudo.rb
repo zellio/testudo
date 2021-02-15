@@ -3,4 +3,5 @@
 module Testudo
   require 'testudo/version'
   require 'testudo/application'
+  require 'testudo/api'
 end
