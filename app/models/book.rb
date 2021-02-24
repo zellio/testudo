@@ -13,7 +13,7 @@ class Testudo::Model::Book < Sequel::Model
                right_key: :series,
                join_table: :books_series_link
 
-  one_to_many :formats, class: 'Testudo::Model::Datum', key: :book
+  one_to_many :formats, class: Testudo::Model::Datum, key: :book
 
   one_to_one :comment, key: :book
 end
