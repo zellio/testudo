@@ -5,7 +5,7 @@ require 'sinatra/base'
 module Sinatra
   module TestudoBookHelpers
     def book_cover_uri(book)
-      library = { 'remote': false, 'path': '' }
+      library = { remote: false, path: '' }
       library.merge!(settings.respond_to?(:library) ? settings.library : {})
 
       if library['remote']
@@ -16,7 +16,7 @@ module Sinatra
     end
 
     def book_download_uri(book, format)
-      library = { 'remote': false, 'path': '' }
+      library = { remote: false, path: '' }
       library.merge!(settings.respond_to?(:library) ? settings.library : {})
 
       if library['remote']
