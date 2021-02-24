@@ -1,5 +1,11 @@
-Style/ClassAndModuleChildren:
-  Enabled: false
+---
+require:
+  - rubocop-rake
+  - rubocop-rspec
+  - rubocop-sequel
 
-Style/NumericLiterals:
-  Enabled: false
+AllCops:
+  NewCops: enable
+
+Metrics/MethodLength:
+  Max: 15

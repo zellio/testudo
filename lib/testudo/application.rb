@@ -11,7 +11,6 @@ require 'sinatra/respond_with'
 require 'sinatra/testudo_book_helpers'
 require 'sinatra/testudo_database_cache'
 
-require 'active_support'
 require 'active_support/core_ext/string/inflections'
 
 require 'pagy'
