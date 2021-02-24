@@ -26,9 +26,7 @@ module Testudo
     content_type :json, 'application/json'
     content_type :txt, 'text/plain'
     content_type :yaml, 'application/x-yaml'
-    formatter :yaml, lambda { |object, _env|
-      (object.is_a?(Sequel::Dataset) && object.all || object).to_yaml
-    }
+    formatter :yaml, ->(object, _env) { object.to_yaml }
 
     default_format :json
 
@@ -63,10 +61,10 @@ module Testudo
         end
       end
 
-      paginate per_page: 16, max_per_page: 256
+      paginate per_page: 16, max_per_page: 128
 
       get do
-        paginate present model_select
+        present paginate model_select
       end
 
       route_param :id, type: Integer do
