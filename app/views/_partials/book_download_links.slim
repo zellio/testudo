@@ -1,0 +1,4 @@
+- formats.each do |format|
+  - if settings.mimetypes.key?(format.format.downcase)
+    a.btn.btn-info.me-2 href="#{url("/books/#{book.id}/download/#{format.format.downcase}")}"
+      = format.format.upcase

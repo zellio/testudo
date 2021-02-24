@@ -1,0 +1,6 @@
+- series = book.series.first
+- if series
+  h6
+    => "From"
+    a href="#{url("/series/#{series.id}")}"
+      | #{series.name} [#{book.series_index}]

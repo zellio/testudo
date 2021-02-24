@@ -1,8 +1,0 @@
-<div class=row>
-  <% books.each do |book| %>
-  <%= erb(:"_partials/book_card", locals: { book: book }) %>
-  <% end %>
-</div>
-<footer class="book-footer">
-  <%= erb :"_partials/pagy_pagination", locals: { pagy: pagy } %>
-</footer>

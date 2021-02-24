@@ -2,10 +2,16 @@
 
 namespace '/authors' do
   get '/?' do
-    erb :authors, locals: {
+    param :page, Integer, required: false
+    param :items, Integer, required: false
+
+    pagy, authors = pagy(Testudo::Model::Author.order(:sort))
+
+    slim :authors, locals: {
       title: 'Author List',
       description: 'List of all authors in the library',
-      authors: Testudo::Model::Author.order(:sort)
+      pagy: pagy,
+      authors: authors
     }
   end
 
@@ -22,7 +28,7 @@ namespace '/authors' do
 
     pagy, books = pagy(author.books_dataset)
 
-    erb :"authors/id", locals: {
+    slim :"authors/id", locals: {
       title: desc,
       description: desc,
       author: author,
