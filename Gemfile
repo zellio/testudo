@@ -21,10 +21,9 @@ gem 'rubyzip', '~> 2.3'
 gem 'sequel', '~> 5.41'
 gem 'sinatra', '~> 2.1'
 gem 'sinatra-contrib', '~> 2.1'
-gem 'sinatra-drumkit', '~> 2.0'
 gem 'sinatra-param', '~> 1.6'
-gem 'sqlite3', '~> 1.4'
 gem 'slim', '~> 4.1'
+gem 'sqlite3', '~> 1.4'
 
 group :production do
   gem 'puma', '~> 5.2'
