@@ -7,7 +7,7 @@ namespace '/books' do
 
     pagy, books = pagy(Testudo::Model::Book.reverse(:id))
 
-    erb :books, locals: {
+    slim :books, locals: {
       title: 'Library',
       description: 'List of all books in the library',
       pagy: pagy,
@@ -23,10 +23,12 @@ namespace '/books' do
 
     desc = "#{book.title} by #{book.authors.map(&:name).join(', ')}"
 
-    erb :"books/id", locals: {
+    slim :"books/id", locals: {
       title: desc,
       description: desc,
-      book: book
+      book: book,
+      authors: book.authors,
+      formats: book.formats
     }
   end
 
@@ -58,15 +60,14 @@ namespace '/books' do
       library = { 'remote' => true, 'path' => 'google.com' }
       library.merge!(settings.respond_to?(:library) ? settings.library : {})
 
+      format_str = format.format.downcase
+      filename = "#{format.name}.#{format_str}"
+
       if library['remote']
-        format_str = format.format.downcase
-        filename = "#{format.name}.#{format_str}"
         remote_path = File.join(book.path, filename)
         redirect path_uri(library['path'], remote_path, library['secure_remote'], true)
       else
-        format_str = format.format.downcase
         type = settings.mimetypes[format_str]
-        filename = "#{format.name}.#{format_str}"
         filepath = File.join(settings.library['path'], book.path, filename)
 
         etag Digest::SHA1.file(filepath)
@@ -88,7 +89,7 @@ namespace '/books' do
 
     desc = "Read #{book.title} by #{book.authors.map(&:name).join(', ')}"
 
-    erb :"books/id/read", locals: {
+    slim :"books/id/read", locals: {
       title: desc,
       description: desc,
       book: book,

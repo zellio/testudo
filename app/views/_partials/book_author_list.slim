@@ -1,0 +1,6 @@
+h6
+  => "By"
+  ul.book-author-list
+    - book.authors.map do |author|
+      li.book-author-list-item
+        a href="#{url("/authors/#{author.id}")}" = author.name
