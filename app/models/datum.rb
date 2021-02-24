@@ -1,4 +1,8 @@
 # frozen_string_literal: true
 
-class Testudo::Model::Datum < Sequel::Model
+module Testudo
+  module Model
+    class Datum < Sequel::Model
+    end
+  end
 end
