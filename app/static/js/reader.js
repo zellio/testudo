@@ -83,35 +83,40 @@ $(document).ready(() => {
             section_keys[index][key] = true;
         });
 
+        let nav = $("nav");
 
-        $("nav").html($("<select/>", {
-            id: "toc-selector",
-            class: "custom-select custom-control-inline",
-            html: book.sections.items.map((section, index) => {
-                let toc_entry = book.navigation.toc.find((element) => {
-                    let element_href = decodeURIComponent(element.href);
-                    if (element_href.indexOf('#') > 0) {
-                        element_href = element_href.substring(0, element_href.lastIndexOf('#'));
-                    }
-                    let possible_keys = section_keys[index];
-                    return possible_keys[element_href] || possible_keys[element_href.substring(1)];
+        nav.addClass("mb-3");
+        nav.html($('<div/>', {
+            class: "container",
+            html: $("<select/>", {
+                id: "toc-selector",
+                class: "form-select form-select-lg",
+                html: book.sections.items.map((section, index) => {
+                    let toc_entry = book.navigation.toc.find((element) => {
+                        let element_href = decodeURIComponent(element.href);
+                        if (element_href.indexOf('#') > 0) {
+                            element_href = element_href.substring(0, element_href.lastIndexOf('#'));
+                        }
+                        let possible_keys = section_keys[index];
+                        return possible_keys[element_href] || possible_keys[element_href.substring(1)];
 
-                });
+                    });
 
-                let title = toc_entry ? toc_entry.title.trim() : "Entry " + index;
-                return $("<option/>", {
-                    id: "toc-option-" + section.idref,
-                    label: title,
-                    text: title,
-                    value: decodeURIComponent(section.href),
-                    'data-section-index': section['index'],
-                    'data-section-source': section['source'],
-                });
-            }),
-            change: (event) => {
-                epub_reader.draw(event.currentTarget.value);
-                suppress_event(event);
-            },
+                    let title = toc_entry ? toc_entry.title.trim() : "Entry " + index;
+                    return $("<option/>", {
+                        id: "toc-option-" + section.idref,
+                        label: title,
+                        text: title,
+                        value: decodeURIComponent(section.href),
+                        'data-section-index': section['index'],
+                        'data-section-source': section['source'],
+                    });
+                }),
+                change: (event) => {
+                    epub_reader.draw(event.currentTarget.value);
+                    suppress_event(event);
+                },
+            })
         }));
     });
 

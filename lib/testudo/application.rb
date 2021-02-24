@@ -15,9 +15,12 @@ require 'active_support'
 require 'active_support/core_ext/string/inflections'
 
 require 'pagy'
+require 'pagy/extras/bootstrap'
 require 'zip'
 require 'json'
 require 'nokogiri'
+require 'slim'
+require 'slim/include'
 
 module Testudo
   class Application < Sinatra::Base
@@ -26,6 +29,11 @@ module Testudo
     set :config_dir, -> { File.join(root, 'config') }
     set :views, -> { File.join(app_dir, 'views') }
     set :public_folder, -> { File.join(app_dir, 'static') }
+
+    Slim::Include.options[:include_dirs] = [
+      views,
+      File.join(views, '_partials')
+    ]
 
     register Sinatra::ConfigFile
     config_file [File.join(config_dir, '*.yml')]
