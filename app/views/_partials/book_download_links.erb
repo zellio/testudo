@@ -1,5 +1,0 @@
-<% book.formats.select do |format|
-  settings.mimetypes[format.format.downcase]
-end.each do |format| %>
-<a class="btn btn-info" href="<%= url("/books/#{book.id}/download/#{format.format.downcase}") %>"><%= format.format.upcase %></a>
-<% end %>

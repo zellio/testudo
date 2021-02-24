@@ -1,0 +1,9 @@
+div.p-4
+  article.card
+    a.d-flex.card-img-top.justify-content-center href="#{url("/books/#{book.id}")}"
+      img.book-cover-frame.m-3 style="max-height: 14rem; max-width: 14rem;" alt="#{book.title} Cover" src="#{path_uri(settings.library['remote'] && settings.library['path'], book_cover_uri(book), settings.library['secure_remote'])}"
+    div.card-body
+      h5.card-title
+        | #{book.title}
+      include book_author_list
+      include book_series

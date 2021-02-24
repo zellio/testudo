@@ -2,11 +2,15 @@
 
 namespace '/series' do
   get '/?' do
-    series = Testudo::Model::Series.order(:sort)
+    param :page, Integer, required: false
+    param :items, Integer, required: false
 
-    erb :series, locals: {
+    pagy, series = pagy(Testudo::Model::Series.order(:sort))
+
+    slim :series, locals: {
       title: 'Series list',
       description: 'List of all series in the library',
+      pagy: pagy,
       series: series
     }
   end
@@ -24,7 +28,7 @@ namespace '/series' do
 
     pagy, books = pagy(series.books_dataset)
 
-    erb :"series/id", locals: {
+    slim :"series/id", locals: {
       title: desc,
       description: desc,
       series: series,
