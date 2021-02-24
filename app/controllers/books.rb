@@ -42,7 +42,7 @@ namespace '/books' do
     halt 404 unless File.readable?(filepath)
 
     etag Digest::SHA1.file(filepath)
-    cache_control :public, :must_revalidate, max_age: 2592000
+    cache_control :public, :must_revalidate, max_age: 2_592_000
 
     send_file(filepath, type: 'image/jpeg', filename: 'cover.jpg')
   end
@@ -71,7 +71,7 @@ namespace '/books' do
         filepath = File.join(settings.library['path'], book.path, filename)
 
         etag Digest::SHA1.file(filepath)
-        cache_control :public, :must_revalidate, max_age: 2592000
+        cache_control :public, :must_revalidate, max_age: 2_592_000
 
         send_file(filepath, type: type, filename: filename)
       end
@@ -119,7 +119,7 @@ namespace '/books' do
     content = entry.get_input_stream.read
 
     etag Digest::SHA1.hexdigest(content)
-    cache_control :public, :must_revalidate, max_age: 2592000
+    cache_control :public, :must_revalidate, max_age: 2_592_000
     content_type settings.mimetypes[File.extname(path)[1..]]
 
     content

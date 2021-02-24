@@ -1,4 +1,8 @@
 # frozen_string_literal: true
 
-class Testudo::Model::Comment < Sequel::Model
+module Testudo
+  module Model
+    class Comment < Sequel::Model
+    end
+  end
 end

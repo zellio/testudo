@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
+require 'rack/sequel_connector'
+
 require 'sinatra/base'
 require 'sinatra/config_file'
-require 'sinatra/drumkit'
 require 'sinatra/namespace'
 require 'sinatra/param'
 require 'sinatra/sequel_connector'
@@ -11,7 +12,6 @@ require 'sinatra/respond_with'
 require 'sinatra/testudo_book_helpers'
 require 'sinatra/testudo_database_cache'
 
-require 'active_support'
 require 'active_support/core_ext/string/inflections'
 
 require 'pagy'
@@ -41,8 +41,12 @@ module Testudo
     register Sinatra::TestudoDatabaseCache
     tmpdir = cache_database
 
-    register Sinatra::SequelConnector
-    set :db, "sqlite://#{tmpdir}/metadata.db"
+    use Rack::SequelConnector, {
+      uri: "sqlite://#{tmpdir}/metadata.db",
+      load_dir: ::File.join(app_dir, 'models'),
+      namespace: Testudo
+    }
+
     Sequel::Model.plugin :json_serializer
     Sequel::Model.plugin :xml_serializer
 
@@ -52,12 +56,13 @@ module Testudo
     register Sinatra::RemoteUri
     register Sinatra::Namespace
     register Sinatra::RespondWith
-    register Sinatra::Drumkit
-
-    rhythm namespace: Testudo
 
     include Pagy::Backend
     helpers Pagy::Frontend
+
+    Dir[::File.join(app_dir, 'controllers', '**/*.rb')].each do |file|
+      instance_eval(File.read(file), file)
+    end
 
     private
 

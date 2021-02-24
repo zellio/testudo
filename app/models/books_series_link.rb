@@ -1,4 +1,8 @@
 # frozen_string_literal: true
 
-class Testudo::Model::BooksSeriesLink < Sequel::Model(:books_series_link)
+module Testudo
+  module Model
+    class BooksSeriesLink < Sequel::Model(:books_series_link)
+    end
+  end
 end
