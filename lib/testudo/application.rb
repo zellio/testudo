@@ -18,7 +18,6 @@ require 'pagy'
 require 'pagy/extras/bootstrap'
 require 'zip'
 require 'json'
-require 'nokogiri'
 require 'slim'
 require 'slim/include'
 
