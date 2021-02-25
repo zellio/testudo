@@ -26,7 +26,9 @@ module Testudo
     content_type :json, 'application/json'
     content_type :txt, 'text/plain'
     content_type :yaml, 'application/x-yaml'
-    formatter :yaml, ->(object, _env) { object.to_yaml }
+    formatter :yaml, lambda { |object, _env|
+      (object.is_a?(Sequel::Dataset) && object.all || object).to_yaml
+    }
 
     default_format :json
 
