@@ -2,7 +2,7 @@ article.row.mt-4.mb-4
   aside.small-gutter.col-12.col-lg-4
     div.card
       a.d-flex.card-img-top.justify-content-center.mb-3 href="#{url("/books/#{book.id}")}"
-        img.book-cover-frame.col-11.m-3 src="#{path_uri(settings.library['remote'] && settings.library['path'], book_cover_uri(book), settings.library['secure_remote'])}" alt="#{book.title} Cover"
+        img.book-cover-frame.col-11.m-3 src="#{url("/books/#{book.id}/cover")}" alt="#{book.title} Cover"
       div.d-flex.justify-content-center.mb-3
         a.btn.btn-info href="#{url("/books/#{book.id}/read")}"
           | Read Online
