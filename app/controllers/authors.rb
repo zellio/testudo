@@ -17,7 +17,6 @@ namespace '/authors' do
 
   get '/:id' do |id|
     param :id, Integer, required: true
-
     param :page, Integer, required: false
     param :items, Integer, required: false
 

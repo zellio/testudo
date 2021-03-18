@@ -6,10 +6,7 @@ require 'sinatra/base'
 require 'sinatra/config_file'
 require 'sinatra/namespace'
 require 'sinatra/param'
-require 'sinatra/sequel_connector'
-require 'sinatra/remote_uri'
 require 'sinatra/respond_with'
-require 'sinatra/testudo_book_helpers'
 require 'sinatra/testudo_database_cache'
 
 require 'active_support/core_ext/string/inflections'
@@ -50,9 +47,7 @@ module Testudo
     Sequel::Model.plugin :xml_serializer
 
     helpers Sinatra::Param
-    helpers Sinatra::TestudoBookHelpers
 
-    register Sinatra::RemoteUri
     register Sinatra::Namespace
     register Sinatra::RespondWith
 
