@@ -2,16 +2,17 @@
 development: &development
   mimetypes:
     azw3: application/x-mobi8-ebook
-    epub: application/epub+zip
-    mobi: application/x-mobipocket-ebook
     css: text/css
+    epub: application/epub+zip
     gif: image/gif
     jpeg: image/jpeg
     js: text/javascript
+    mobi: application/x-mobipocket-ebook
     mp3: audio/mpeg
     mp4: audio/mp4
     opf: application/x-dtbncx+xml
     otf: font/otf
+    pdf: application/pdf
     pls: application/pls+xml
     png: image/png
     smil: application/smil+xml

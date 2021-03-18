@@ -38,13 +38,18 @@ namespace '/books' do
     book = Testudo::Model::Book[id]
     halt 404 unless book
 
-    filepath = File.join(settings.library['path'], book.path, 'cover.jpg')
-    halt 404 unless File.readable?(filepath)
+    library = settings.library || {}
+    filepath = File.join(library['path'], book.path, 'cover.jpg')
 
-    etag Digest::SHA1.file(filepath)
-    cache_control :public, :must_revalidate, max_age: 2_592_000
+    if library["remote"]
+      redirect "http#{'s' if library['secure_remote']}://#{filepath}"
+    else
+      halt 404 unless File.readable?(filepath)
 
-    send_file(filepath, type: 'image/jpeg', filename: 'cover.jpg')
+      etag Digest::SHA1.file(filepath)
+      cache_control :public, :must_revalidate, max_age: 2_592_000
+      send_file(filepath, type: 'image/jpeg', filename: "#{book.title} - Cover.jpg")
+    end
   end
 
   ['/:id/download/:format', '/:id/download.:format'].each do |path|
@@ -57,23 +62,20 @@ namespace '/books' do
       format = Testudo::Model::Datum[book: id, format: format.upcase]
       halt 404 unless format
 
-      library = { 'remote' => true, 'path' => 'google.com' }
-      library.merge!(settings.respond_to?(:library) ? settings.library : {})
-
-      format_str = format.format.downcase
-      filename = "#{format.name}.#{format_str}"
+      library = settings.library || {}
+      format_string = format.format.downcase
+      filepath = File.join(library["path"], book.path, "#{format.name}.#{format_string}")
 
       if library['remote']
-        remote_path = File.join(book.path, filename)
-        redirect path_uri(library['path'], remote_path, library['secure_remote'], true)
+        redirect "http#{'s' if library['secure_remote']}://#{filepath}"
       else
-        type = settings.mimetypes[format_str]
-        filepath = File.join(settings.library['path'], book.path, filename)
+        halt 404 unless File.readable?(filepath)
 
         etag Digest::SHA1.file(filepath)
         cache_control :public, :must_revalidate, max_age: 2_592_000
 
-        send_file(filepath, type: type, filename: filename)
+        type = settings.mimetypes[format_string] || 'application/octet-stream'
+        send_file(filepath, type: type, filename: filepath)
       end
     end
   end
@@ -100,15 +102,15 @@ namespace '/books' do
   get '/:id/read/*' do |id, path|
     param :id, Integer, required: true
 
-    format_str = 'epub'
+    format_string = 'epub'
 
     book = Testudo::Model::Book[id]
     halt 404 unless book
 
-    format = Testudo::Model::Datum[book: id, format: format_str.upcase]
+    format = Testudo::Model::Datum[book: id, format: format_string.upcase]
     halt 404 unless format
 
-    filename = "#{format.name}.#{format_str}"
+    filename = "#{format.name}.#{format_string}"
     filepath = File.join(settings.library['path'], book.path, filename)
     halt 404 unless File.readable?(filepath)
 

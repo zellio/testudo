@@ -6,10 +6,13 @@ namespace '/search' do
     param :page, Integer, required: false
     param :items, Integer, required: false
 
-    query = params['query']
-
-    book_ids = db[:fts_short_index].select(:book_id).where(Sequel.lit('`fts_short_index` MATCH ?', query))
-    pagy, books = pagy(Testudo::Model::Book.where(id: book_ids))
+    pagy, books = pagy(
+      Testudo::Model::Book.where(
+        id: Sequel::Model.db[:fts_short_index]
+          .select(:book_id)
+          .where(Sequel.lit('`fts_short_index` MATCH ?', params['query']))
+      )
+    )
 
     slim :books, locals: {
       title: 'Search Results',
