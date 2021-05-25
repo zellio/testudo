@@ -32,14 +32,12 @@ namespace '/books' do
     }
   end
 
-  get '/:id/cover' do |id|
-    param :id, Integer, required: true
-
+  get %r{/(\d+)/(cover|thumb)} do |id, type|
     book = Testudo::Model::Book[id]
     halt 404 unless book
 
     library = settings.library || {}
-    filepath = File.join(library['path'], book.path, 'cover.jpg')
+    filepath = File.join(library['path'], book.path, "#{type}.jpg")
 
     if library["remote"]
       redirect "http#{'s' if library['secure_remote']}://#{filepath}"
@@ -48,9 +46,11 @@ namespace '/books' do
 
       etag Digest::SHA1.file(filepath)
       cache_control :public, :must_revalidate, max_age: 2_592_000
-      send_file(filepath, type: 'image/jpeg', filename: "#{book.title} - Cover.jpg")
+      send_file(filepath, type: 'image/jpeg', filename: "#{book.title} - #{type}.jpg")
     end
   end
+
+
 
   ['/:id/download/:format', '/:id/download.:format'].each do |path|
     get path do |id, format|
