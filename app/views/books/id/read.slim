@@ -1,6 +1,6 @@
 link rel="stylesheet" href="#{url('/css/reader.css')}" media="screen"
 
-input type="hidden" id="reader-source-url" name="reader-source-url" value="#{url("/books/#{book.id}/download/epub")}"
+a#reader-source-url.d-none href="#{url("/books/#{book.id}/download/epub")}"
 
 div#prev.arrow
   i.fa.fa-fw.fa-chevron-left
