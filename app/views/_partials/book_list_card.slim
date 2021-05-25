@@ -2,7 +2,7 @@ div.card.book-list-card
   article
     div.d-flex.flex-column.flex-sm-row
       a.d-flex.card-img-left.justify-content-center.flex-shrink-0 href="#{url("/books/#{book.id}")}"
-        img.book-cover-frame.book-list-cover-frame.m-3 alt="#{book.title} Cover" src="#{url("/books/#{book.id}/cover")}"
+        img.book-cover-frame.book-list-cover-frame.m-3 alt="#{book.title} Cover" src="#{url("/books/#{book.id}/thumb")}"
       div.book-card-list-body.p-3.flex-grow-1.card-body.d-flex.flex-column
         h5.card-title
           = book.title
