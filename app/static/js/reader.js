@@ -12,7 +12,7 @@ function suppress_event(event) {
 var EpubReader = (function() {
     function EpubReader(book_url, zip_source) {
         this.url = new URL(document.URL);
-        this.source_url = new URL($('#reader-source-url').val());
+        this.source_url = new URL($('#reader-source-url').attr('href'));
         this.currentLocationCfi = new ePub.CFI(this.url.hash.slice(1));
 
         // epub.js doesn't pass options correctly so we have this ugly hack in
