@@ -2,10 +2,13 @@
 
 namespace '/series' do
   get '/?' do
-    param :page, Integer, required: false
-    param :items, Integer, required: false
+    param :page, String, required: false
 
-    pagy, series = pagy(Testudo::Model::Series.order(:sort))
+    series = Testudo::Model::Series.order{sort}
+    buckets = generate_buckets(series).keys
+    params[:page] = buckets.first unless params[:page]
+
+    pagy, series = pagy_bucket(series, buckets: buckets)
 
     slim :series, locals: {
       title: 'Series list',
