@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
-namespace '/authors' do
+namespace '/authors' do # rubocop:disable Metrics/BlockLength
   get '/?' do
-    param :page, Integer, required: false
-    param :items, Integer, required: false
+    param :page, String, required: false
 
-    pagy, authors = pagy(Testudo::Model::Author.order(:sort))
+    authors = Testudo::Model::Author.order{sort}
+    buckets = generate_buckets(authors).keys
+    params[:page] = buckets.first unless params[:page]
+
+    pagy, authors = pagy_bucket(authors, buckets: buckets)
 
     slim :authors, locals: {
       title: 'Author List',
