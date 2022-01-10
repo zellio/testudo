@@ -13,6 +13,7 @@ require 'active_support/core_ext/string/inflections'
 
 require 'pagy'
 require 'pagy/extras/bootstrap'
+require 'pagy/extras/bucket'
 require 'zip'
 require 'json'
 require 'slim'
@@ -54,16 +55,32 @@ module Testudo
     include Pagy::Backend
     helpers Pagy::Frontend
 
+    Pagy::DEFAULT.merge({ items: 24, size: [1, 3, 3, 1] })
+
     Dir[::File.join(app_dir, 'controllers', '**/*.rb')].each do |file|
       instance_eval(File.read(file), file)
     end
 
     private
 
-    def pagy_get_vars(collection, _vars)
-      { count: collection.count,
-        page: params['page'],
-        items: params['items'] || 24 }
+    def pagy_get_vars(collection, vars)
+      pagy_set_items_from_params(vars) if defined?(ItemsExtra)
+      vars[:count] ||= collection.count
+      vars[:page] ||= params[:page]
+      vars[:items] ||= params[:items] || Pagy::DEFAULT[:items]
+      vars[:size] = [1, 3, 3, 1]
+      vars
+    end
+
+    def generate_buckets(collection)
+      collection.group_and_count{substr(sort, 0, 2).as(:bucket)}.reduce({}) do |hash, row|
+        hash[row[:bucket]] = row[:count]
+        hash
+      end
+    end
+
+    def pagy_bucket_filter(collection, key)
+      collection.select_append { substr(sort, 0, 2).as(bucket) }.where(bucket: key)
     end
   end
 end
