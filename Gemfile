@@ -16,7 +16,7 @@ group :development, :test do
 end
 
 gem 'activesupport', '~> 6.1'
-gem 'api-pagination', '~> 4.8'
+gem 'api-pagination', '~> 5.0'
 gem 'nokogiri', '~> 1.11'
 gem 'grape', '~> 1.5'
 gem 'json', '~> 2.5'
